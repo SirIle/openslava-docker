@@ -1,0 +1,17 @@
+This vagrant file will set up a Ubuntu 13.10 box on VirtualBox with
+local networking enabled that will run in 10.10.10.30. It will contain
+the docker executable which is pulled from the docker repository.
+
+Prerequisites:
+ - VirtualBox
+ - Vagrant
+ - Ansible
+
+Usage:
+  vagrant up
+
+This will download the box from canonical if it doesn't exist in the
+local cache. It will then use ansible to provision the rest.
+
+You can then connect to the box using either "vagrant ssh" or just "ssh
+root@10.10.10.30" with the password "vagrant".

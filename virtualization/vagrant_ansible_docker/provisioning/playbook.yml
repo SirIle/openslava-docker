@@ -1,0 +1,14 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: update apt cache if needed
+      apt: update_cache=yes cache_valid_time=3600
+    - name: make sure joe is installed
+      apt: pkg=joe
+    - name: add apt_key for docker
+      apt_key: url=https://get.docker.io/gpg
+    - name: add repository for docker
+      apt_repository: repo='deb http://get.docker.io/ubuntu docker main'
+    - name: make sure docker is installed
+      apt: pkg=lxc-docker
