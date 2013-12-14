@@ -5,13 +5,38 @@ the docker executable which is pulled from the docker repository.
 Prerequisites:
  - VirtualBox
  - Vagrant
+   - vagrant-vbguest plugin ("vagrant plugin install vagrant-vbguest") 
+     (This keeps the VirtualBox guest additions in synch so shared
+     folders work)
  - Ansible
 
 Usage:
   vagrant up
 
 This will download the box from canonical if it doesn't exist in the
-local cache. It will then use ansible to provision the rest.
+local cache. It will then use ansible to provision the rest. It will
+also install the correct version of the VirtualBox guest additions.
 
 You can then connect to the box using either "vagrant ssh" or just "ssh
 root@10.10.10.30" with the password "vagrant".
+
+Note: If you get an ssh error when provisioning, remove the relevant
+entries from the ~/.ssh/known_hosts file.
+
+After you have logged in, the dockerfiles for building the docker 
+images can be found from ~/dockerfiles. Building and running the riak 
+image would be:
+  cd dockerfiles/riak
+  sudo docker build -t "test/riak" .
+
+Then you can list the images using:
+  sudo docker images
+
+And start the riak image with:
+  sudo docker run -p 8098:8098 -p 8087:8087 -p 10022:22 test/riak
+
+The -p options bind the ports to the container, so that then you can
+try accessing the running riak instance from the host with a web browser
+from the url "http://10.10.10.30:8098/riak/test". Also ssh should
+work with "ssh root@10.10.10.30 -p 10022" and the password "basho"
+(given in the Dockerfile).
