@@ -8,7 +8,7 @@ Listing the images:
   sudo docker images
 
 Start the riak image with:
-  sudo docker run -p 8098:8098 -p 8087:8087 -p 10022:22 test/riak
+  sudo docker run -p 8098:8098 -p 8087:8087 -p 10022:22 <your_name>/riak
 
 The -p options bind the ports to the container, so that then you can
 access the running riak instance from the host with a web browser
