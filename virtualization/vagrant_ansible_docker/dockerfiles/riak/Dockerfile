@@ -14,6 +14,8 @@ RUN locale-gen en_US en_US.UTF-8
 ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 # Set the root account password
 RUN echo 'root:basho' | chpasswd
+RUN apt-get install -y rsyslog
+
 RUN curl -s http://apt.basho.com/gpg/basho.apt.key | apt-key add --
 RUN echo "deb http://apt.basho.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/basho.list
 RUN apt-get update
