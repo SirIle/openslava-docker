@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # run Ansible as the provisioner if the host OS is Unix-like (Linux, OS X), use
   # the shell provisioner otherwise - the end result is the same in both cases
-  if ENV["OS"].include? "Windows" or ENV["OS"].include? "MINGW32"
+  if ENV["OS"].to_s.include? "Windows" or ENV["OS"].to_s.include? "MINGW32"
     config.vm.provision "shell", path: "./provisioning/setup.sh"
   else
     config.vm.provision :ansible do |ansible|
