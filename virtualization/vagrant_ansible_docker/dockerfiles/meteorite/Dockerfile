@@ -1,11 +1,6 @@
 # Create a docker image to run Riak
 FROM ubuntu:latest
 
-# Set the ENV variables and proxy
-RUN echo 'Acquire::http::Proxy "http://opkfipx.op.fi:8085";' > /etc/apt/apt.conf
-ENV http_proxy http://opkfipx.op.fi:8085
-ENV https_proxy http://opkfipx.op.fi:8085
-
 # Hack for initctl
 RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -s /bin/true /sbin/initctl
@@ -30,13 +25,11 @@ RUN echo "deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu $(lsb_release -c
 RUN apt-get update
 RUN apt-get -y install nodejs
 
-# Install meteor
-RUN echo tlsv1 > $HOME/.curlrc
+# Install meteor, kludge for libssl bug
+RUN echo tlsv1 > ~/.curlrc
+RUN echo tlsv1 > /root/.curlrc
 RUN curl https://install.meteor.com | /bin/sh
-
-# Set proxy for NPM
-RUN npm config set proxy http://opkfipx.op.fi:8085
-RUN npm config set https-proxy http://opkfipx.op.fi:8085
+RUN mv ~/.meteor /root
 
 # Install meteorite
 RUN npm -g install meteorite
