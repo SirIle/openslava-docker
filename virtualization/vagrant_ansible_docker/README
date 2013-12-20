@@ -8,7 +8,7 @@ Prerequisites:
    - vagrant-vbguest plugin ("vagrant plugin install vagrant-vbguest") 
      (This keeps the VirtualBox guest additions in synch so shared
      folders work)
- - Ansible
+ - Ansible (Linux, OS X only - will use the Shell provisioner in Windows)
 
 Usage:
   vagrant up
