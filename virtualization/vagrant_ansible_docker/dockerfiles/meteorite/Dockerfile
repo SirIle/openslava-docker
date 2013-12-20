@@ -26,10 +26,9 @@ RUN apt-get update
 RUN apt-get -y install nodejs
 
 # Install meteor, kludge for libssl bug
+ENV HOME /root
 RUN echo tlsv1 > ~/.curlrc
-RUN echo tlsv1 > /root/.curlrc
 RUN curl https://install.meteor.com | /bin/sh
-RUN mv ~/.meteor /root
 
 # Install meteorite
 RUN npm -g install meteorite
