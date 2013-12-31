@@ -15,6 +15,7 @@ RUN apt-get install -y curl lsb-release supervisor openssh-server rsyslog
 RUN mkdir -p /var/run/sshd
 RUN mkdir -p /var/log/supervisor
 RUN locale-gen en_US en_US.UTF-8
+RUN echo "LC_ALL=C" > /etc/default/locale 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 # Set the root account password
 RUN echo 'root:meteor' | chpasswd
