@@ -46,7 +46,7 @@ and the system can be tested from there with for example:
 
 Note: At the moment the upstream lookup hasn't been enabled in this nodens configuration, so trying
 to install packages in the riak image at the moment fails unless multiple DNS servers are configured
-on the command line in the script.
+on the command line in the script (this is the case as of now).
 
 The docker image is reachable through ssh and the root password is "nodens", the shell script
 exposes the ssh port as 1001.
