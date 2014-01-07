@@ -11,7 +11,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 # Install and setup project dependencies
-RUN apt-get install -y curl lsb-release supervisor openssh-server rsyslog git
+RUN apt-get install -y curl lsb-release supervisor openssh-server rsyslog git net-tools
 RUN mkdir -p /var/run/sshd
 RUN mkdir -p /var/log/supervisor
 RUN locale-gen en_US en_US.UTF-8
