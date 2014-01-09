@@ -6,7 +6,7 @@ Build with:
 
 Start with:
 
-	sudo docker start -p 9160:9160 -p 9042:9042 -h cassandra1 test/cassandra
+	sudo docker run -p 9160:9160 -p 9042:9042 -h cassandra1 test/cassandra
 
 Note: For now cassandra expects to find a seed node from "cassandra1", so it should be used as the host name for now.
 
