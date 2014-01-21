@@ -1,41 +1,13 @@
-First version, stand alone for now, start script for clustering and pipework will follow shortly.
+First version, stand alone for now, start script for clustering and configuring external database will follow shortly.
 
 Build with:
 
-	sudo docker build -t test/cassandra .
+	sudo docker build -t test/liferay .
 
-Note: To be able to run the cluster, you need to start the nodens DNS server first. From this folder
-it can be started with:
+The docker image will expose two ports 22 and 8080 for the users to interact with.
 
-	../nodens/startNodens.sh
+To spawn an instance of Liferay Portal 6.2.0-CE you need to 
+-----------------------------------------------------------
 
-Start the Cassandra instances with:
+    docker run -p <host_port>:22 -p<host_port>:8080 -d test/liferay 
 
-	./startCassandra <INSTANCE_NUMBER>
-
-First instance should be 1 so that the correct ports are exposed to the host. The memory limits have been
-configured to be quite small (max heap 128M) so that more simultaneous instances can be started. This 
-value can be changed in the Dockerfile.
-
-After subsequent instances are started they should join the ring automatically. Internally they are
-known with the names cassandraX.local, where X is the instance number. The ssh ports are exposed to
-the host as 111X with X being the instance number.
-
-Test with DataStax devcenter and point it to: 10.10.10.30 and it should work, try for example:
-
-	CREATE KEYSPACE demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
-
-	CREATE TABLE demo.users ( 
-		userid text,
-		firstname text,
-		lastname text, 
-		PRIMARY KEY (userid) 
-	);
-
-
-	INSERT INTO demo.users (userid, firstname, lastname)
-	VALUES ('ile','Ilkka','Anttonen');
-
-	SELECT * FROM demo.users;
-
-and the result should be returned.
