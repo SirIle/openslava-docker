@@ -15,11 +15,20 @@ function check_usage() {
 check_usage $# 1 "Usage: $0 <NODE_NUMBER>"
 
 NODE=$1
-
+IMAGE_NAME=test/cassandra
 hostname="cassandra$NODE"
 ip=10.1.2.$NODE
 
-echo "Starting cassandra instance $NODE, hostname $hostname, ip $ip, ssh port 111$NODE"
+echo "== Checking if the Cassandra container has already been built."
+docker images | grep "^$IMAGE_NAME"
+if [ $? == 1 ]; then
+	echo "== Container has not been built, building now."
+	docker build -t $IMAGE_NAME . 
+else
+	echo "== Container has been built; skipping build step."
+fi
+
+echo "== Starting cassandra instance $NODE, hostname $hostname, ip $ip, ssh port 111$NODE"
 
 # If it's the first instance, expose the ports
 if [[ $NODE == 1 ]]; then
@@ -30,9 +39,10 @@ fi
 
 #exit 0
 
-cid=$(sudo docker run -d $ports -h $hostname -dns 10.1.1.1 test/cassandra)
+cid=$(sudo docker run -d $ports -h $hostname -dns 10.1.1.1 $IMAGE_NAME)
 sudo pipework br1 $cid $ip/22
 
 # Register the host to the dns server
-curl -X PUT -H "Content-Type: application/json" http://localhost:8053/lookup -d '{"address":"'$ip'","name":"'$hostname'","ttl":"10","expires":"3600","type":1}'
-curl -X PUT -H "Content-Type: application/json" http://localhost:8053/lookup -d '{"address":"'$ip'","name":"cassandra","ttl":"10","expires":"3600","type":1}'
+# TODO: delete me if the heartbeat works
+#curl -X PUT -H "Content-Type: application/json" http://localhost:8053/lookup -d '{"address":"'$ip'","name":"'$hostname'","ttl":"10","expires":"3600","type":1}'
+#curl -X PUT -H "Content-Type: application/json" http://localhost:8053/lookup -d '{"address":"'$ip'","name":"cassandra","ttl":"10","expires":"3600","type":1}'

@@ -19,6 +19,10 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 # Set the root account password
 RUN echo 'root:root' | chpasswd
 
+# Add the heartbeat script
+ADD files/dns-heartbeat.sh /usr/local/bin/dns-heartbeat.sh
+RUN chmod ugo+rx /usr/local/bin/dns-heartbeat.sh
+
 # Add the repositories
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/oracle.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
