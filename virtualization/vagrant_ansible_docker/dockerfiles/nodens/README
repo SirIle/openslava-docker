@@ -5,12 +5,12 @@ Supervisor is then used to start rsyslogd, sshd (in port 22) and nodens.
 
 The image can be built with:
 
-	sudo docker build -t <imagename> .
+	sudo docker build -rm -t <imagename> .
 
 Check out the nodens documentation for how to use it. Running the created docker
 image can be for example:
 
-	sudo docker run -p 10022:22 -p 8053:8053 <imagename>
+	sudo docker run -p 1001:22 -p 8053:8053 <imagename>
 
 Then assuming that the docker runs in IP 10.10.10.30 the dns server can be tested
 by running:
@@ -44,11 +44,7 @@ and the system can be tested from there with for example:
 
 	curl 1.riak.local:8098
 
-Note: At the moment the upstream lookup hasn't been enabled in this nodens configuration, so trying
-to install packages in the riak image at the moment fails unless multiple DNS servers are configured
-on the command line in the script (this is the case as of now).
-
-The docker image is reachable through ssh and the root password is "nodens", the shell script
+The docker image is reachable through ssh and the root password is "root", the shell script
 exposes the ssh port as 1001.
 
 The node logs can be found from /var/log/supervisor/node.log.
