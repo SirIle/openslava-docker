@@ -13,7 +13,7 @@
     - name: make sure docker is installed
       apt: pkg=lxc-docker
     - name: add apt_key for nodejs
-      apt_key: id=C7917B12
+      apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0xc7917b12
     - name: add repository for node
       apt_repository: repo='deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu saucy main'
     - name: make sure nodejs is installed
