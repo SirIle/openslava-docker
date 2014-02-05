@@ -18,3 +18,5 @@
       apt_repository: repo='deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu saucy main'
     - name: make sure nodejs is installed
       apt: pkg=nodejs
+    - name: install pipework
+      get_url: url=https://raw2.github.com/jpetazzo/pipework/master/pipework dest=/usr/local/bin/pipework mode=0555
