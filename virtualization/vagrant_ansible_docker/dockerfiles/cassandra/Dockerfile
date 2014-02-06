@@ -16,15 +16,13 @@ RUN apt-get update
 # Install and configure Cassandra
 RUN apt-get install -y libjna-java dsc20 python-cql
 RUN ln -s /usr/share/java/jna.jar /usr/share/cassandra/lib
-RUN sed -i.bak 's/^# num_tokens.*/num_tokens: 256/' /etc/cassandra/cassandra.yaml
-RUN sed -i.bak 's/listen_address: localhost/listen_address: /' /etc/cassandra/cassandra.yaml
-RUN sed -i.bak 's/rpc_address: localhost/rpc_address: 0.0.0.0/' /etc/cassandra/cassandra.yaml
-RUN sed -i.bak 's/seeds: "127.0.0.1"/seeds: "cassandra1,cassandra"/g' /etc/cassandra/cassandra.yaml
-RUN sed -i.bak 's/#MAX_HEAP_SIZE="4G"/MAX_HEAP_SIZE="256M"/' /etc/cassandra/cassandra-env.sh
-RUN sed -i.bak 's/#HEAP_NEWSIZE="800M"/HEAP_NEWSIZE="64M"/' /etc/cassandra/cassandra-env.sh
 
 # Change the system to use dns before files for host name resolution
 RUN sed -i.bak 's/files dns/dns files/' /etc/nsswitch.conf
+
+# Copy the configuration files into place
+ADD files/cassandra.yaml /etc/cassandra/cassandra.yaml
+ADD files/cassandra-env.sh /etc/cassandra/cassandra-env.sh
 
 # Expose the ports
 EXPOSE 9042 9160 22
