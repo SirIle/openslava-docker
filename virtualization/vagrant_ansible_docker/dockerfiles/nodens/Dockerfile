@@ -1,5 +1,5 @@
 # Create a docker image to run nodens by Oscar Renalias
-FROM sirile/node:latest
+FROM sirile/node:0.1
 
 # Set up the supervisor configuration
 ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf

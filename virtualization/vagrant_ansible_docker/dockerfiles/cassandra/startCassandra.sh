@@ -20,10 +20,10 @@ hostname="cassandra$NODE"
 ip=10.1.2.$NODE
 
 echo "== Checking if the Cassandra container has already been built."
-docker images | grep "^$IMAGE_NAME"
+sudo docker images | grep "^$IMAGE_NAME"
 if [ $? == 1 ]; then
 	echo "== Container has not been built, building now."
-	docker build -t $IMAGE_NAME . 
+	sudo docker build -t $IMAGE_NAME . 
 else
 	echo "== Container has been built; skipping build step."
 fi

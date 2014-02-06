@@ -2,7 +2,7 @@ First version, stand alone for now, start script for clustering and pipework wil
 
 Build with:
 
-	sudo docker build -t test/cassandra .
+	sudo docker build -rm -t test/cassandra .
 
 Note: To be able to run the cluster, you need to start the nodens DNS server first. From this folder
 it can be started with:
