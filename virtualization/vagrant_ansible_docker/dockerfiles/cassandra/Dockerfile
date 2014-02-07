@@ -14,8 +14,8 @@ RUN curl -L http://debian.datastax.com/debian/repo_key | apt-key add -
 RUN apt-get update
 
 # Install and configure Cassandra
-RUN apt-get install -y libjna-java dsc20 python-cql
-RUN ln -s /usr/share/java/jna.jar /usr/share/cassandra/lib
+RUN apt-get install -y dsc20 python-cql 
+#RUN ln -s /usr/share/java/jna.jar /usr/share/cassandra/lib
 
 # Change the system to use dns before files for host name resolution
 RUN sed -i.bak 's/files dns/dns files/' /etc/nsswitch.conf
