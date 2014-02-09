@@ -37,12 +37,5 @@ else
         ports="-p 111$NODE:22"
 fi
 
-#exit 0
-
 cid=$(sudo docker run -d $ports -h $hostname -dns 10.1.1.1 $IMAGE_NAME)
-sudo pipework br1 $cid $ip/22
-
-# Register the host to the dns server
-# TODO: delete me if the heartbeat works
-#curl -X PUT -H "Content-Type: application/json" http://localhost:8053/lookup -d '{"address":"'$ip'","name":"'$hostname'","ttl":"10","expires":"3600","type":1}'
-#curl -X PUT -H "Content-Type: application/json" http://localhost:8053/lookup -d '{"address":"'$ip'","name":"cassandra","ttl":"10","expires":"3600","type":1}'
+sudo pipework br1 $cid $ip/21
