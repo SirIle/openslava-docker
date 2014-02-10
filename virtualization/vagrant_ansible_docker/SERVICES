@@ -1,0 +1,6 @@
+Service name	IP range	SSH Port	Exposed ports	Notes
+------------	--------	--------	-------------	-----
+Nodens (dns)	10.1.1.1	1001		53		Internal DNS server
+Cassandra	10.1.2.*	1021->		9160,9042	First node exposes ports
+MongoDB		10.1.3.1	1031		27017
+Meteorite	10.1.4.1	1041		3000
