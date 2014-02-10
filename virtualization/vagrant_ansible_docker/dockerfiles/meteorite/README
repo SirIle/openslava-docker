@@ -10,7 +10,7 @@ running on the host OS to edit the files and they are exposed all the way to the
 meteorite container.
 
 Currently meteorite isn't automatically started, the
-easiest way is to ssh to the container (ssh root@10.10.10.30 -p 1131),
+easiest way is to ssh to the container (ssh root@10.10.10.30 -p 1041),
 password is "root" and just start meteorite with mrt.
 
 The database has been set to use the mongodb running in another container.
@@ -20,7 +20,7 @@ There is an example project included and the startup is:
 	../nodens/startNodens.sh
 	../mongodb/startMongoDB.sh
 	./startMeteorite.sh /home/vagrant/dockerfiles/meteorite/MeteorProjects/CoffeeTest
-	ssh root@10.10.10.30 -p 1131
+	ssh root@10.10.10.30 -p 1041
 	cd /project
 	mrt
 

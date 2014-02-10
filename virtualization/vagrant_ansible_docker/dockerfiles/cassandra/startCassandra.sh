@@ -28,13 +28,13 @@ else
 	echo "== Container has been built; skipping build step."
 fi
 
-echo "== Starting cassandra instance $NODE, hostname $hostname, ip $ip, ssh port 111$NODE"
+echo "== Starting cassandra instance $NODE, hostname $hostname, ip $ip, ssh port 102$NODE"
 
 # If it's the first instance, expose the ports
 if [[ $NODE == 1 ]]; then
-        ports="-p 9160:9160 -p 9042:9042 -p 111$NODE:22"
+        ports="-p 9160:9160 -p 9042:9042 -p 102$NODE:22"
 else
-        ports="-p 111$NODE:22"
+        ports="-p 102$NODE:22"
 fi
 
 cid=$(sudo docker run -d $ports -h $hostname -dns 10.1.1.1 $IMAGE_NAME)

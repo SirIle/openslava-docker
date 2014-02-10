@@ -28,9 +28,9 @@ else
 	echo "== Container has been built; skipping build step."
 fi
 
-echo "== Starting meteorite, hostname $hostname, ip $ip, ssh port 1131"
+echo "== Starting meteorite, hostname $hostname, ip $ip, ssh port 1041"
 
-ports="-p 3000:3000 -p 1131:22"
+ports="-p 3000:3000 -p 1041:22"
 
 cid=$(sudo docker run -d $ports -h $hostname -dns 10.1.1.1 -e MONGO_URL=mongodb://mongo:27017/meteor -v $project_dir:/project $IMAGE_NAME)
 sudo pipework br1 $cid $ip/21

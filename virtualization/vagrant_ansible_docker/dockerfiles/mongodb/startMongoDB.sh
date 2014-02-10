@@ -13,9 +13,9 @@ else
 	echo "== Container has been built; skipping build step."
 fi
 
-echo "== Starting mongodb, hostname $hostname, ip $ip, ssh port 1121"
+echo "== Starting mongodb, hostname $hostname, ip $ip, ssh port 1031"
 
-ports="-p 27017 -p 1121:22"
+ports="-p 27017 -p 1031:22"
 
 cid=$(sudo docker run -d $ports -h $hostname -dns 10.1.1.1 $IMAGE_NAME)
 sudo pipework br1 $cid $ip/21
