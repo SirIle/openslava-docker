@@ -1,5 +1,5 @@
 # Create a docker image to run meteorite
-FROM sirile/node:0.1
+FROM sirile/node:0.2
 
 # Set up the supervisor configuration
 ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf

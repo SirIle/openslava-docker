@@ -1,5 +1,5 @@
 # Create a docker image to run MongoDB
-FROM sirile/ubuntu:0.1
+FROM sirile/ubuntu:0.2
 
 # Set up the supervisor configuration
 ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf

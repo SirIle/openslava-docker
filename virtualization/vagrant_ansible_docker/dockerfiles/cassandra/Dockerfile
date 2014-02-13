@@ -1,5 +1,5 @@
 # Create a docker image to run Cassandra
-FROM sirile/oraclejre:0.1
+FROM sirile/oraclejre:0.2
 
 # Add the heartbeat script
 ADD files/dns-heartbeat.sh /usr/local/bin/dns-heartbeat.sh
@@ -16,7 +16,6 @@ RUN apt-get install -y dsc20 python-cql datastax-agent sysstat
 
 # Change the system to use dns before files for host name resolution
 RUN sed -i.bak 's/files dns/dns files/' /etc/nsswitch.conf
-RUN echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf
 
 # Copy the configuration files into place
 ADD files/cassandra.yaml /etc/cassandra/cassandra.yaml
