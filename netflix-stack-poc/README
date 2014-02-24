@@ -1,0 +1,41 @@
+Requirements
+============
+- Vagrant
+- VirtualBox
+
+Running the reference application
+=================================
+1) Start the Vagrant VM:
+
+vagrant up
+
+This process may take 3-5 minutes.
+
+2) SSH into the new Vagrant VM:
+
+vagrant ssh
+
+If running on Windows and without cygwin, this may not work so SSH into the VM using an SSH client (like PuTTY). Use 10.10.10.30 as the host, port 22, and vagrant/vagrant as credentials.
+
+3) Build the Docker container, and start it:
+
+cd dockerfiles/netflix-recipe-rss
+./startRecipeRss.sh
+
+The bootstrap script will first build the Docker container with the needed components (Eureka, middle tier and edge tier) and automatically start it. The process may take 5-10 minutes.
+
+4) Access the application from the host: http://10.10.10.30:9090/jsp/rss.jsp (port 9090 in the Vagrant host is forwarded to port 9090 in the Docker container that runs the applications). 
+
+It takes about 2-3 minutes until the RSS components (edge and middle tier) find the Eureka service registry and start working.
+
+Troubleshooting
+===============
+The Docker container has an SSH daemon running and it's possible to log in (as if it was any other server) from the Vagrant host:
+
+ssh root@localhost -p 1301
+
+Use root/root.
+
+Application logs can be found under /var/log/supervisor; rss-edge.log and rss-middletier.log contain the logs from the RSS recipe components. 
+
+Eureka runs in a Tomcat server and its logs can be found in /var/log/tomcat7.
