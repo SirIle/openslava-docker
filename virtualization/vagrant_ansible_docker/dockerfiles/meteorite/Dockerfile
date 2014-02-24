@@ -1,38 +1,27 @@
-# Create a docker image to run Riak
-FROM ubuntu:latest
+# Create a docker image to run meteorite
+FROM sirile/node:0.2
 
-# Hack for initctl
-RUN dpkg-divert --local --rename --add /sbin/initctl
-RUN ln -s /bin/true /sbin/initctl
-
-# Update the APT cache
-RUN sed -i.bak 's/main$/main universe/' /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
-
-# Install and setup project dependencies
-RUN apt-get install -y curl lsb-release supervisor openssh-server rsyslog 
-RUN mkdir -p /var/run/sshd
-RUN mkdir -p /var/log/supervisor
-RUN locale-gen en_US en_US.UTF-8
-RUN echo "LC_ALL=C" > /etc/default/locale 
+# Set up the supervisor configuration
 ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf
-# Set the root account password
-RUN echo 'root:meteor' | chpasswd
 
-# Install node, npm
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7917B12
-RUN echo "deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/node.list
-RUN apt-get update
-RUN apt-get -y install nodejs
+# Add the heartbeat script
+ADD files/dns-heartbeat.sh /usr/local/bin/dns-heartbeat.sh
+RUN chmod ugo+rx /usr/local/bin/dns-heartbeat.sh
 
-# Install meteor, kludge for libssl bug
+# Install meteor
 ENV HOME /root
-RUN echo tlsv1 > ~/.curlrc
 RUN curl https://install.meteor.com | /bin/sh
 
 # Install meteorite
 RUN npm -g install meteorite
+
+# Change the system to use dns before files for host name resolution
+RUN sed -i.bak 's/files dns/dns files/' /etc/nsswitch.conf
+
+# Create the temp directory for linking the local-folder to
+RUN mkdir /tmp/local
+ENV MONGO_URL mongodb://mongo:27017/meteor
+RUN echo "export MONGO_URL=mongodb://mongo:27017/meteor" > ~/.bash_profile
 
 # Expose the ports
 EXPOSE 22 3000

@@ -19,11 +19,11 @@ value can be changed in the Dockerfile.
 
 After subsequent instances are started they should join the ring automatically. Internally they are
 known with the names cassandraX.local, where X is the instance number. The ssh ports are exposed to
-the host as 111X with X being the instance number.
+the host as 102X with X being the instance number.
 
 Test with DataStax devcenter and point it to: 10.10.10.30 and it should work, try for example:
 
-	CREATE KEYSPACE demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+	CREATE KEYSPACE demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
 
 	CREATE TABLE demo.users ( 
 		userid text,
