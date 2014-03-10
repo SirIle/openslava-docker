@@ -1,6 +1,6 @@
-First version, stand alone for now, start script for clustering and pipework will follow shortly.
+Dockerfile for building Cassandra instances. Uses the Datastax community edition.
 
-Build with:
+Build with running the script or manually with:
 
 	sudo docker build -rm -t test/cassandra .
 
@@ -14,8 +14,9 @@ Start the Cassandra instances with:
 	./startCassandra <INSTANCE_NUMBER>
 
 First instance should be 1 so that the correct ports are exposed to the host. The memory limits have been
-configured to be quite small (max heap 128M) so that more simultaneous instances can be started. This 
-value can be changed in the Dockerfile.
+configured to be quite small (max heap 64M) so that more simultaneous instances can be started. This 
+value can be changed in the Dockerfile. Instructions in minimizing the Cassandra memory footprint are 
+by John Berryman and can be found from http://architects.dzone.com/articles/building-perfect-cassandra.
 
 After subsequent instances are started they should join the ring automatically. Internally they are
 known with the names cassandraX.local, where X is the instance number. The ssh ports are exposed to
