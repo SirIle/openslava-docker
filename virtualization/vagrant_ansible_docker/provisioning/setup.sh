@@ -13,8 +13,8 @@ echo "Adding the Docker apt source"
 echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list
 echo "Running apt-get update"
 apt-get update
-echo "Installing docker"
-apt-get install -y lxc-docker
+echo "Installing docker and bridge-utils"
+apt-get install -y lxc-docker bridge-utils
 
 # install pipework
 echo "Installing pipework"
