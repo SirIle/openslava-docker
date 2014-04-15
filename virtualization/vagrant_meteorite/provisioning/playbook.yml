@@ -1,0 +1,23 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: update apt cache if needed
+      apt: update_cache=yes cache_valid_time=3600
+    - name: make sure joe is installed
+      apt: pkg=joe
+    - name: configure tmux
+      shell: echo new-session > ~vagrant/.tmux.conf
+    - name: force colorful prompt
+      shell: sed -i -e 's,#force_color_prompt,force_color_prompt,g' ~vagrant/.bashrc
+    - name: add apt_key for nodejs
+      apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0xc7917b12
+    - name: add repository for node
+      apt_repository: repo='deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu saucy main'
+    - name: make sure nodejs is installed
+      apt: pkg=nodejs
+    - name: make sure that meteor is installed
+      sudo_user: vagrant
+      shell: curl https://install.meteor.com | /bin/sh
+    - name: make sure meteorite is installed
+      npm: name=meteorite global=yes

@@ -1,0 +1,20 @@
+This Vagrant image is used for running meteor(ite) applciations. Detailed
+instructions about the set-up and usage can be found from the blog at
+https://blog.accenture.com/ilkka_anttonen/2014/04/15/building-and-using-a-virtualized-runtime-for-meteorite-applications/.
+
+The following prerequisites need to be installed and working:
+	* VirtualBox
+	* Vagrant
+	* Cygwin with OpenSSH and rsync
+
+The components that are installed in the image:
+	* Meteor
+	* Meteorite
+	* Node
+	* NPM
+	* A couple of tools like joe and tmux settings
+
+Rsync is used to share the folder "c:\users\<user.name>\projects" from the
+host to the guest. After provisioning with vagrant, leave the command
+"vagrant rsync-auto" running on the host to ensure that the folders keep
+in sync.
