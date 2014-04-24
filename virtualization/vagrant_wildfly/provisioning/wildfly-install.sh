@@ -6,7 +6,7 @@
 #date            :20140312
 #usage           :/bin/bash wildfly-install.sh
 
-WILDFLY_VERSION=8.0.0.Final
+WILDFLY_VERSION=8.1.0.CR1
 WILDFLY_FILENAME=wildfly-$WILDFLY_VERSION
 WILDFLY_ARCHIVE_DIR=/tmp
 WILDFLY_ARCHIVE_NAME=$WILDFLY_FILENAME.tar.gz
