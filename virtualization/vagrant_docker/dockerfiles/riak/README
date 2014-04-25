@@ -1,0 +1,21 @@
+The files in this directory can be used to build a docker image that
+will run a Riak server as well as an sshd.
+
+Building the image:
+  sudo docker build -t "<your_name>/riak" .
+
+Listing the images:
+  sudo docker images
+
+Start the riak image with:
+  sudo docker run -p 8098:8098 -p 8087:8087 -p 10022:22 <your_name>/riak
+
+The -p options bind the ports to the container, so that then you can
+access the running riak instance from the host with a web browser
+from the url "http://10.10.10.30:8098/riak/test". Also ssh swork with
+"ssh root@10.10.10.30 -p 10022", password is "basho" (given in the 
+Dockerfile).
+
+There's also a script file included which sets up the internal networking.
+It sets the riak image running in a static (visible only inside the docker
+container) IP of 10.1.1.2. The ssh port visible outside is 1002.

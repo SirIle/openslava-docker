@@ -1,0 +1,13 @@
+First version, stand alone for now, start script for clustering and configuring external database will follow shortly.
+
+Build with:
+
+	sudo docker build -t test/liferay .
+
+The docker image will expose two ports 22 and 8080 for the users to interact with.
+
+To spawn an instance of Liferay Portal 6.2.0-CE you need to 
+-----------------------------------------------------------
+
+    docker run -p <host_port>:22 -p<host_port>:8080 -d test/liferay 
+

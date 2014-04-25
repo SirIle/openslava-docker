@@ -1,0 +1,41 @@
+Dockerfile for building Cassandra instances. Uses the Datastax community edition.
+
+Build with running the script or manually with:
+
+	sudo docker build -rm -t test/cassandra .
+
+Note: To be able to run the cluster, you need to start the nodens DNS server first. From this folder
+it can be started with:
+
+	../nodens/startNodens.sh
+
+Start the Cassandra instances with:
+
+	./startCassandra <INSTANCE_NUMBER>
+
+First instance should be 1 so that the correct ports are exposed to the host. The memory limits have been
+configured to be quite small (max heap 64M) so that more simultaneous instances can be started. This 
+value can be changed in the Dockerfile. Instructions in minimizing the Cassandra memory footprint are 
+by John Berryman and can be found from http://architects.dzone.com/articles/building-perfect-cassandra.
+
+After subsequent instances are started they should join the ring automatically. Internally they are
+known with the names cassandraX.local, where X is the instance number. The ssh ports are exposed to
+the host as 102X with X being the instance number.
+
+Test with DataStax devcenter and point it to: 10.10.10.30 and it should work, try for example:
+
+CREATE KEYSPACE demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
+
+CREATE TABLE demo.users ( 
+	userid text,
+	firstname text,
+	lastname text, 
+	PRIMARY KEY (userid) 
+);
+
+
+INSERT INTO demo.users (userid, firstname, lastname) VALUES ('ile','Ilkka','Anttonen');
+
+SELECT * FROM demo.users where userid = 'ile';
+
+and the result should be returned.

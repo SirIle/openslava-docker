@@ -1,0 +1,17 @@
+Opscenter is a tool by Datastax for monitoring Cassandra clusters. For
+Opscenter and the Cassandra dock to work, Nodens has to be running. It can
+be started with:
+
+	../nodens/startNodens.sh
+
+Then start the Opscenter with the command:
+
+	startOpscenter.sh
+
+After Opscenter has been started, you can access it using a web browser by
+going to the address:
+
+	10.10.10.30:8888
+
+When Cassandra nodes start, they will automatically start a datastax-client
+which reports status information to Opscenter.
