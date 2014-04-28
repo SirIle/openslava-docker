@@ -6,12 +6,12 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "saucy64"
+  config.vm.box = "trusty64"
   config.vm.hostname = "vagrant-docker"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -31,7 +31,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # run Ansible as the provisioner if the host OS is Unix-like (Linux, OS X), use
   # the shell provisioner otherwise - the end result is the same in both cases
   if ENV["OS"].to_s.include? "Windows" or ENV["OS"].to_s.include? "MINGW32"
-    config.vm.provision "shell", path: "./provisioning/setup.sh"
+    config.vm.provision "shell" do |sh|
+      sh.path = "provisioning/windows.sh"
+      sh.args = "provisioning/playbook.yml provisioning/inventory"
+    end
   else
     config.vm.provision :ansible do |ansible|
       ansible.playbook = "provisioning/playbook.yml"
