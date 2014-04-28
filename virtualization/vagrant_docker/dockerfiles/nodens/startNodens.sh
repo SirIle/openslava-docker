@@ -4,7 +4,7 @@ echo "== Checking if the container for NodeNS has already been built."
 sudo docker images | grep "^$IMAGE_NAME"
 if [ $? == 1 ]; then
 	echo "== Container has not been built, building now."
-	sudo docker build -rm -t $IMAGE_NAME . 
+	sudo docker build --rm -t $IMAGE_NAME . 
 else
 	echo "== Container has been built; skipping build step."
 fi

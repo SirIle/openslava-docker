@@ -1,5 +1,5 @@
 # Create a docker image to run Cassandra
-FROM sirile/oraclejre:0.2
+FROM sirile/oraclejre:0.4
 
 # Add the supervisor configuration
 ADD supervisord.conf /etc/supervisor/conf.d/supervisor.conf

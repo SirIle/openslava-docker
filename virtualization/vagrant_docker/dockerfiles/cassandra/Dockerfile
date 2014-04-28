@@ -1,5 +1,5 @@
 # Create a docker image to run Cassandra
-FROM sirile/oraclejre:0.2
+FROM sirile/oraclejre:0.4
 
 # Add the heartbeat script
 ADD files/dns-heartbeat.sh /usr/local/bin/dns-heartbeat.sh
