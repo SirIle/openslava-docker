@@ -1,0 +1,15 @@
+This container will include the following:
+	- Consul (to be run in bootstrap mode as the Consul master node)
+	- Logstash
+	- ElasticSearch / Kibana
+
+It will act as the main place to push the logs to using rsyslog.
+
+It will have a static IP address of 10.1.1.1 essestially replacing NodeNS
+container.
+
+In the 10.1.x.x address space it will act as a DNS server (or can the
+Consul-agents be used locally?)
+
+Consul installation may later move to the parent container as all the nodes
+should be running Consul.
