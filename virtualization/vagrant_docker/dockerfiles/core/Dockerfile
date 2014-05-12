@@ -28,6 +28,9 @@ RUN sed -i "s/elasticsearch: \"http:\/\/\"+window.location.hostname+\":9200\",/e
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 
+# Add the services provided by this container
+ADD files/log-consul.json /etc/consul.d/log-consul.json
+
 # Expose the ports
 EXPOSE 22 80 5000 9200 9300
 

@@ -1,11 +1,13 @@
-This container will include the following:
+This container includes the following:
 	- Consul (to be run in bootstrap mode as the Consul master node)
-	- Logstash
-	- ElasticSearch / Kibana
+	- Logstash 1.4.1
+	- ElasticSearch 1.1.1
+  - Nginx + Kibana
 
-It will act as the main place to push the logs to using rsyslog.
+It will act as the main place to push the logs to using rsyslog. Kibana UI is
+exposed to the outside from port 80.
 
-It will have a static IP address of 10.1.1.1 essestially replacing NodeNS
+It has a static IP address of 10.1.1.1 essentially replacing NodeNS
 container.
 
 In the 10.1.x.x address space it will act as a DNS server (or can the
@@ -13,3 +15,8 @@ Consul-agents be used locally?)
 
 Consul installation may later move to the parent container as all the nodes
 should be running Consul.
+
+TODO:
+	- Configure logstash to read local syslog messages on core
+	- Test that rsyslog can deliver messages from other containers
+	- General: in startup scripts check that core-container is running when starting others
