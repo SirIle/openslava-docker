@@ -30,6 +30,7 @@ ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 
 # Add the services provided by this container
 ADD files/log-consul.json /etc/consul.d/log-consul.json
+ADD files/config-consul.json /etc/consul.d/config-consul.json
 
 # Expose the ports
 EXPOSE 22 80 5000 9200 9300
