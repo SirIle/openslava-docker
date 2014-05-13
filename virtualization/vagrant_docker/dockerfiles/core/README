@@ -10,11 +10,10 @@ exposed to the outside from port 80.
 It has a static IP address of 10.1.1.1 essentially replacing NodeNS
 container.
 
-In the 10.1.x.x address space it will act as a DNS server (or can the
-Consul-agents be used locally?)
-
 Consul installation may later move to the parent container as all the nodes
 should be running Consul.
+
+Consul UI can be found from the address http://10.10.10.30:8500/ui
 
 TODO:
 	- Configure logstash to read local syslog messages on core

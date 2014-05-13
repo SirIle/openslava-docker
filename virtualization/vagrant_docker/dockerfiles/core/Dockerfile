@@ -11,6 +11,10 @@ RUN chmod oug+rx /usr/local/bin/consul
 # Set up the Consul configuration
 RUN mkdir /etc/consul.d
 
+# Set up Consul UI
+RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_web_ui.zip -O /tmp/consul_ui.zip
+RUN unzip /tmp/consul_ui.zip -d /opt/consul_ui
+
 # Install Elasticsearch and logstash, newer versions are nicer
 RUN wget https://download.elasticsearch.org/logstash/logstash/logstash-1.4.1.tar.gz -O /tmp/logstash.tar.gz
 RUN (cd /opt && tar xzf /tmp/logstash.tar.gz)
@@ -33,7 +37,7 @@ ADD files/log-consul.json /etc/consul.d/log-consul.json
 ADD files/config-consul.json /etc/consul.d/config-consul.json
 
 # Expose the ports
-EXPOSE 22 80 5000 9200 9300
+EXPOSE 22 80 5000 8500 9200 9300
 
 # Start the supervisord
 CMD ["/usr/bin/supervisord"]
