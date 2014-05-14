@@ -17,18 +17,17 @@ check_usage $# 1 "Usage: $0 <NODE_NUMBER>"
 NODE=$1
 IMAGE_NAME=test/cassandra
 hostname="cassandra$NODE"
-ip=10.1.2.$NODE
 
 echo "== Checking if the Cassandra container has already been built."
 sudo docker images | grep "^$IMAGE_NAME"
 if [ $? == 1 ]; then
 	echo "== Container has not been built, building now."
-	sudo docker build -t $IMAGE_NAME . 
+	sudo docker build -t $IMAGE_NAME .
 else
 	echo "== Container has been built; skipping build step."
 fi
 
-echo "== Starting cassandra instance $NODE, hostname $hostname, ip $ip, ssh port 102$NODE"
+echo "== Starting cassandra instance $NODE, hostname $hostname, ssh port 102$NODE"
 
 # If it's the first instance, expose the ports
 if [[ $NODE == 1 ]]; then
@@ -37,5 +36,4 @@ else
         ports="-p 102$NODE:22"
 fi
 
-cid=$(sudo docker run -d $ports -h $hostname --dns 127.0.0.1 $IMAGE_NAME)
-sudo pipework br1 $cid $ip/21
+cid=$(sudo docker run -d $ports -h $hostname --dns 127.0.0.1 --link core:core $IMAGE_NAME)
