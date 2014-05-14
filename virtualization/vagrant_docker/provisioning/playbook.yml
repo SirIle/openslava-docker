@@ -24,5 +24,7 @@
       apt: pkg=nodejs
     - name: make sure bridge-utils is installed
       apt: pkg=bridge-utils
+    - name: make sure arping is installed
+      apt: pkg=iputils-arping
     - name: install pipework
       get_url: url=https://raw2.github.com/jpetazzo/pipework/master/pipework dest=/usr/local/bin/pipework mode=0555

@@ -11,5 +11,5 @@ fi
 
 echo "== Starting the opscenter container."
 
-CONTAINER=$(sudo docker run -d -p 8888:8888 -p 1121:22 -e DNSPORT=53 -h opscenter $IMAGE_NAME)
+CONTAINER=$(sudo docker run -d -p 8888:8888 -p 1121:22 --dns 127.0.0.1 -h opscenter $IMAGE_NAME)
 sudo pipework br1 $CONTAINER 10.1.2.100/21
