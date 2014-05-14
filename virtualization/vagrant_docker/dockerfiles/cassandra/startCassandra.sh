@@ -37,5 +37,5 @@ else
         ports="-p 102$NODE:22"
 fi
 
-cid=$(sudo docker run -d $ports -h $hostname --dns 10.1.1.1 $IMAGE_NAME)
+cid=$(sudo docker run -d $ports -h $hostname --dns 127.0.0.1 $IMAGE_NAME)
 sudo pipework br1 $cid $ip/21

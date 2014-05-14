@@ -1,0 +1,7 @@
+{
+  "service": {
+    "name": "cassandra",
+    "tags": ["database"],
+    "port": 9160
+  }
+}

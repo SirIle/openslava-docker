@@ -2,12 +2,12 @@ Dockerfile for building Cassandra instances. Uses the Datastax community edition
 
 Build with running the script or manually with:
 
-	sudo docker build -rm -t test/cassandra .
+	sudo docker build --rm -t test/cassandra .
 
-Note: To be able to run the cluster, you need to start the nodens DNS server first. From this folder
+Note: To be able to run the cluster, you need to start the core server first. From this folder
 it can be started with:
 
-	../nodens/startNodens.sh
+	../core/startCore.sh
 
 Start the Cassandra instances with:
 
