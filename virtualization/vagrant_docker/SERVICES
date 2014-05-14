@@ -1,8 +1,9 @@
-Service name  SSH Port  Exposed ports	             Notes
-------------  --------  -------------               -----
-Core          1000      80, 9200, 8500 (Consul UI)  80 is Kibana, 8500 Consul UI
-Cassandra     1021->    9160,9042                   First node exposes ports
+Service name  SSH Port  Exposed ports	 Notes
+------------  --------  -------------   -----
+Core          1000      80, 9200, 8500  80 is Kibana, 8500 Consul UI
+Bare          1031->
+Cassandra     1021->    9160,9042       First node exposes ports
 Opscenter     1121      8888
-------------  --------  -------------               -----
+------------  --------  -------------   -----
 MongoDB       1031      27017
 Meteorite     1041      3000
