@@ -1,0 +1,6 @@
+{
+  "service": {
+    "name": "opscenter",
+    "tags": ["databasemanagement"]
+  }
+}
