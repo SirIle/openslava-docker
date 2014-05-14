@@ -1,11 +1,11 @@
-This vagrant file will set up a Ubuntu 13.10 box on VirtualBox with
+This vagrant file will set up a Ubuntu 14.04 box on VirtualBox with
 local networking enabled that will run in 10.10.10.30. It will contain
 the docker executable which is pulled from the docker repository.
 
 Prerequisites:
  - VirtualBox
  - Vagrant
-   - vagrant-vbguest plugin ("vagrant plugin install vagrant-vbguest") 
+   - vagrant-vbguest plugin ("vagrant plugin install vagrant-vbguest")
      (This keeps the VirtualBox guest additions in synch so shared
      folders work)
  - Ansible (Linux, OS X only - will use the Shell provisioner in Windows)
@@ -23,20 +23,20 @@ root@10.10.10.30" with the password "vagrant".
 Note: If you get an ssh error when provisioning, remove the relevant
 entries from the ~/.ssh/known_hosts file.
 
-After you have logged in, the dockerfiles for building the docker 
-images can be found from ~/dockerfiles. Building and running the riak 
+After you have logged in, the dockerfiles for building the docker
+images can be found from ~/dockerfiles. Building and running the core
 image would be:
-  cd dockerfiles/riak
-  sudo docker build -t "test/riak" .
+  cd dockerfiles/core
+  sudo docker build -t test/core .
 
 Then you can list the images using:
   sudo docker images
 
-And start the riak image with:
-  sudo docker run -p 8098:8098 -p 8087:8087 -p 10022:22 test/riak
+And start the core image with the supplied script or:
+  sudo docker run -d -p 1000:22 -p 9200:9200 -p 80:80 -p 8500:8500 -h core --name core --dns 127.0.0.1 $IMAGE_NAME
 
 The -p options bind the ports to the container, so that then you can
 try accessing the running riak instance from the host with a web browser
-from the url "http://10.10.10.30:8098/riak/test". Also ssh should
-work with "ssh root@10.10.10.30 -p 10022" and the password "basho"
-(given in the Dockerfile).
+from the url "http://10.10.10.30:80" which displays the Kibana UI for
+LogStash. Also ssh should work with "ssh root@10.10.10.30 -p 1000" and the
+password "root" (given in the Dockerfile).

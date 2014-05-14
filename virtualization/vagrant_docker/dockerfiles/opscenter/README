@@ -15,3 +15,6 @@ going to the address:
 
 When Cassandra nodes start, they will automatically start a datastax-client
 which reports status information to Opscenter.
+
+When you configure the cluster, you can use address "cassandra.service.consul"
+or "cassandra1.node.consul".
