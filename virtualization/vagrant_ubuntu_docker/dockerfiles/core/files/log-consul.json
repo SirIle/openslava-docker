@@ -1,0 +1,7 @@
+{
+  "service": {
+    "name": "log",
+    "tags": ["syslog"],
+    "port": 5000
+  }
+}
