@@ -1,42 +1,16 @@
-This vagrant file will set up a Ubuntu 14.04 box on VirtualBox with
-local networking enabled that will run in 10.10.10.30. It will contain
-the docker executable which is pulled from the docker repository.
+This is a test of new Vagrant 1.6.3 direct support for Docker containers.
+At the moment things don't work too well as Vagrant 1.6.3 has multiple bugs
+and it's suggested to wait until they can get them fixed.
 
-Prerequisites:
- - VirtualBox
- - Vagrant
-   - vagrant-vbguest plugin ("vagrant plugin install vagrant-vbguest")
-     (This keeps the VirtualBox guest additions in synch so shared
-     folders work)
- - Ansible (Linux, OS X only - will use the Shell provisioner in Windows)
+The "core" container doesn't build properly for some reason most probably
+related to boot2docker-VM that Vagrant uses as the default for running
+containers.
 
-Usage:
-  vagrant up
+The "bare" container can be started with "vagrant up -provider=docker bare"
+and it can be reached with "vagrant ssh bare", but that's basically it. At
+the moment you're better off using the "vagrant_ubuntu_docker" virtual
+machine and using Docker there.
 
-This will download the box from canonical if it doesn't exist in the
-local cache. It will then use ansible to provision the rest. It will
-also install the correct version of the VirtualBox guest additions.
-
-You can then connect to the box using either "vagrant ssh" or just "ssh
-root@10.10.10.30" with the password "vagrant".
-
-Note: If you get an ssh error when provisioning, remove the relevant
-entries from the ~/.ssh/known_hosts file.
-
-After you have logged in, the dockerfiles for building the docker
-images can be found from ~/dockerfiles. Building and running the core
-image would be:
-  cd dockerfiles/core
-  sudo docker build -t test/core .
-
-Then you can list the images using:
-  sudo docker images
-
-And start the core image with the supplied script or:
-  sudo docker run -d -p 1000:22 -p 9200:9200 -p 80:80 -p 8500:8500 -h core --name core --dns 127.0.0.1 $IMAGE_NAME
-
-The -p options bind the ports to the container, so that then you can
-try accessing the running riak instance from the host with a web browser
-from the url "http://10.10.10.30:80" which displays the Kibana UI for
-LogStash. Also ssh should work with "ssh root@10.10.10.30 -p 1000" and the
-password "root" (given in the Dockerfile).
+If someone can figure out how the ports can be exposed to the host (or what
+IP the boot2docker default host gets), please add the information to this
+README-file.
