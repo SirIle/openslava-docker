@@ -7,7 +7,7 @@
     - name: make sure joe is installed
       apt: pkg=joe
     - name: configure tmux
-      shell: echo new-session > ~vagrant/.tmux.conf
+      shell: creates=~vagrant/.tmux.conf echo new-session > ~vagrant/.tmux.conf
     - name: force colorful prompt
       shell: sed -i -e 's,#force_color_prompt,force_color_prompt,g' ~vagrant/.bashrc
     - name: add apt_key for docker
@@ -22,3 +22,11 @@
       apt_repository: repo='deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main'
     - name: make sure nodejs is installed
       apt: pkg=nodejs
+    - name: modify docker startup command
+      shell: sed -i -e 's,#DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4",DOCKER_OPTS="-H tcp://10.10.10.30:4243 -H unix:///var/run/docker.sock",g' /etc/default/docker
+    - name: restart docker service
+      service: name=docker state=restarted
+    - name: install docker-py
+      pip: name='git+git://github.com/dotcloud/docker-py#egg=docker-py'
+    - name: install maestro-ng
+      pip: name='git+git://github.com/sirile/maestro-ng#egg=maestro'
