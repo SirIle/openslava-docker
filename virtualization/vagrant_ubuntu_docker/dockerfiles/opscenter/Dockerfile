@@ -17,6 +17,10 @@ ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 ADD files/config-consul.json /etc/consul.d/config-consul.json
 ADD files/opscenter-consul.json /etc/consul.d/opscenter-consul.json
 
+# Add the cluster configuration files
+RUN mkdir /etc/opscenter/clusters
+ADD files/Test_Cluster.conf /etc/opscenter/clusters/Test_Cluster.conf
+
 # Expose the ports
 EXPOSE 8888 22 61620
 

@@ -13,27 +13,43 @@ services:
         lifecycle:
           running: [{type: tcp, port: consului}]
         dns: localhost
+  opscenter:
+    image: test/opscenter
+    requires: [core]
+    instances:
+      opscenter:
+        ship: vagrant-docker
+        ports: {ssh: '22:1121', opscenterui: 8888, agent: 61620}
+        links:
+            core: core
+        lifecycle:
+          running: [{type: tcp, port: agent}]
+        dns: localhost
   cassandra:
     image: test/cassandra
     requires: [core]
     instances:
       cassandra1:
         ship: vagrant-docker
-        ports: {ssh: '22:1021', cassandra: 9160}
+        ports: {ssh: '22:1021', cassandra: 9160, agent: 61621}
         links:
             core: core
         lifecycle:
-          running: [{type: tcp, port: cassandra}]
+          running: [{type: tcp, port: agent}]
         dns: localhost
       cassandra2:
         ship: vagrant-docker
-        ports: {ssh: '22:1022'}
+        ports: {ssh: '22:1022', agent: "61621:61622"}
         links:
             core: core
+        lifecycle:
+          running: [{type: tcp, port: agent}]
         dns: localhost
       cassandra3:
         ship: vagrant-docker
-        ports: {ssh: '22:1023'}
+        ports: {ssh: '22:1023', agent: "61621:61623"}
         links:
             core: core
+        lifecycle:
+          running: [{type: tcp, port: agent}]
         dns: localhost

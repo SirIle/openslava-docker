@@ -369,7 +369,7 @@ rpc_server_type: hsha
 # rpc_max_threads represents the maximum number of client requests this server may execute concurrently.
 #
 rpc_min_threads: 1
-rpc_max_threads: 1
+rpc_max_threads: 2
 
 # uncomment to set socket buffer sizes on rpc connections
 # rpc_send_buff_size_in_bytes:
