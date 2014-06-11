@@ -6,6 +6,10 @@
       apt: update_cache=yes cache_valid_time=3600
     - name: make sure joe is installed
       apt: pkg=joe
+    - name: make sure htop is installed
+      apt: pkg=htop
+    - name: make sure pip is installed
+      apt: pkg=python-pip
     - name: configure tmux
       shell: creates=~vagrant/.tmux.conf echo new-session > ~vagrant/.tmux.conf
     - name: force colorful prompt
