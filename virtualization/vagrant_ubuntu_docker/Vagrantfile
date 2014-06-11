@@ -3,6 +3,7 @@
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
+TIMEZONE = "Europe/Helsinki"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
@@ -28,6 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
+
+  # Set the timezone
+  config.vm.provision :shell, :inline => "echo \""+TIMEZONE+"\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
 
   # run Ansible as the provisioner if the host OS is Unix-like (Linux, OS X), use
   # the shell provisioner otherwise - the end result is the same in both cases
