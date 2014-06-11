@@ -17,6 +17,9 @@ ADD files/cassandra-env.sh /etc/cassandra/cassandra-env.sh
 # Configure the address of opscenter (used if agents are enabled in supervisord.conf)
 RUN echo "stomp_interface: opscenter.service.consul" | tee -a /etc/datastax-agent/address.yaml
 
+# Add the rsyslog-configuration file
+ADD files/rsyslog.conf /etc/rsyslog.conf
+
 # Add the supervisor configuration (last so it can be changed without full rebuild)
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 

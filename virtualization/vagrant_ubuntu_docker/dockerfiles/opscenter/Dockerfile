@@ -13,6 +13,9 @@ RUN apt-get install -y opscenter
 # Add the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 
+# Add the rsyslog configuration for log aggregation
+ADD files/rsyslog.conf /etc/rsyslog.conf
+
 # Add the consul configuration for DNS and the services
 ADD files/config-consul.json /etc/consul.d/config-consul.json
 ADD files/opscenter-consul.json /etc/consul.d/opscenter-consul.json
