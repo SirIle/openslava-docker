@@ -1,0 +1,25 @@
+name: cassandra
+
+ships:
+  vagrant-docker: {ip: 10.10.10.30}
+
+services:
+  core:
+    image: test/core
+    instances:
+      core:
+        ship: vagrant-docker
+        ports: {ssh: '22:1000', elasticsearch:  9200, kibana: 80 , consului: 8500}
+        lifecycle:
+          running: [{type: tcp, port: consului}]
+        dns: localhost
+  bare:
+    image: test/bare
+    requires: [core]
+    instances:
+      bare:
+        ship: vagrant-docker
+        ports: {ssh: '22:1001'}
+        links:
+          core: core
+        dns: localhost
