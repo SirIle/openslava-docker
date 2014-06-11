@@ -10,6 +10,9 @@ services:
       core:
         ship: vagrant-docker
         ports: {ssh: '22:1000', elasticsearch:  9200, kibana: 80 , consului: 8500}
+        volumes:
+          /etc/localtime: /etc/localtime
+          /etc/timezone: /etc/timezone
         lifecycle:
           running: [{type: tcp, port: consului}]
         dns: localhost
@@ -20,6 +23,9 @@ services:
       bare:
         ship: vagrant-docker
         ports: {ssh: '22:1001'}
+        volumes:
+          /etc/localtime: /etc/localtime
+          /etc/timezone: /etc/timezone
         links:
           core: core
         dns: localhost
