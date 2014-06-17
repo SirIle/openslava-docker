@@ -19,6 +19,8 @@ RUN (cd /tmp && wget --no-check-certificate http://download.elasticsearch.org/ki
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -rf /tmp/*
 RUN sed -i "s/elasticsearch: \"http:\/\/\"+window.location.hostname+\":9200\",/elasticsearch: \"http:\/\/10.10.10.30:9200\",/g"  /usr/share/nginx/html/config.js
+# Set logstash as the default dashboard in Kibana
+RUN mv /usr/share/nginx/html/app/dashboards/logstash.json /usr/share/nginx/html/app/dashboards/default.json
 
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
