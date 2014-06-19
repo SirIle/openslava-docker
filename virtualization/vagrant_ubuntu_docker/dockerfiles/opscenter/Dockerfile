@@ -1,6 +1,6 @@
 # Create a docker image to run Cassandra
 FROM sirile/oraclejre:0.6
-
+MAINTAINER Ilkka Anttonen
 
 # Add the repository for Cassandra
 RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
