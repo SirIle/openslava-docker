@@ -1,5 +1,5 @@
 # Create a docker image to run core services Consul, Elasticsearch, Logstash and Kibana
-FROM sirile/oraclejre:0.5
+FROM sirile/oraclejre:0.6
 MAINTAINER Ilkka Anttonen
 
 # Set up Consul UI
