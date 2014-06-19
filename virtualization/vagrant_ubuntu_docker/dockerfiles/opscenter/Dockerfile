@@ -1,5 +1,5 @@
 # Create a docker image to run Cassandra
-FROM sirile/oraclejre:0.5
+FROM sirile/oraclejre:0.6
 
 
 # Add the repository for Cassandra
