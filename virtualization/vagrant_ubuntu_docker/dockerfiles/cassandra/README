@@ -30,3 +30,12 @@ INSERT INTO demo.users (userid, firstname, lastname) VALUES ('ile','Ilkka','Antt
 SELECT * FROM demo.users where userid = 'ile';
 
 and the result should be returned.
+
+For programmatically getting the result (CoffeeScript):
+
+cql = require 'node-cassandra-cql'
+client = new cql.Client({hosts:['cassandra.service.consul'],keyspace: 'demo'})
+client.execute "SELECT * FROM demo.users where userid = ?", ['ile'], (err, result) ->
+        throw err if err
+        console.log "Result: " + result.rows[0].firstname
+        process.exit 0
