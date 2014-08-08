@@ -1,0 +1,21 @@
+name: cassandra
+
+ships:
+  vagrant-docker: {ip: 10.10.10.30}
+
+services:
+  node:
+    image: test/node
+    instances:
+      node1:
+        ship: vagrant-docker
+        ports: {ssh: '22:1041'}
+        links:
+            core: core
+        volumes:
+          /etc/localtime: /etc/localtime
+          /etc/timezone: /etc/timezone
+          /root/Projects: /home/vagrant/Projects
+        lifecycle:
+          running: [{type: tcp, port: ssh}]
+        dns: localhost

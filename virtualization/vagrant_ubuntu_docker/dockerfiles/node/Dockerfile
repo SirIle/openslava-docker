@@ -2,6 +2,12 @@
 FROM sirile/node:0.6
 MAINTAINER Ilkka Anttonen
 
+# Install CoffeeScript
+RUN npm install -g coffee-script
+
+# Install IcedCoffeeScript
+RUN npm install -g iced-coffee-script
+
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 
