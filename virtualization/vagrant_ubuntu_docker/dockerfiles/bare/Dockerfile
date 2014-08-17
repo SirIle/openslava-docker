@@ -1,5 +1,5 @@
 # Create a docker image to run core services Consul, Elasticsearch, Logstash and Kibana
-FROM sirile/ubuntu:0.6
+FROM sirile/ubuntu:0.7
 MAINTAINER Ilkka Anttonen
 
 # Set up the supervisor configuration

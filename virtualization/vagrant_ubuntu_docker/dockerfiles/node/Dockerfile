@@ -1,5 +1,5 @@
 # Create a docker image to run core services Consul, Elasticsearch, Logstash and Kibana
-FROM sirile/node:0.6
+FROM sirile/node:0.7
 MAINTAINER Ilkka Anttonen
 
 # Install CoffeeScript

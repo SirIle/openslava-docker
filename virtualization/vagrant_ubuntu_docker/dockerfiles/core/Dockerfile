@@ -1,9 +1,9 @@
 # Create a docker image to run core services Consul, Elasticsearch, Logstash and Kibana
-FROM sirile/oraclejre:0.6
+FROM sirile/oraclejre:0.7
 MAINTAINER Ilkka Anttonen
 
 # Set up Consul UI
-RUN wget https://dl.bintray.com/mitchellh/consul/0.3.0_web_ui.zip -O /tmp/consul_ui.zip
+RUN wget https://dl.bintray.com/mitchellh/consul/0.3.1_web_ui.zip -O /tmp/consul_ui.zip
 RUN unzip /tmp/consul_ui.zip -d /opt/consul_ui
 
 # Install Elasticsearch and logstash, newer versions are nicer
