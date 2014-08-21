@@ -26,6 +26,7 @@ CREATE TABLE demo.users (
 
 
 INSERT INTO demo.users (userid, firstname, lastname) VALUES ('ile','Ilkka','Anttonen');
+INSERT INTO demo.users (userid, firstname, lastname) VALUES ('toinen','Some','User');
 
 SELECT * FROM demo.users where userid = 'ile';
 
