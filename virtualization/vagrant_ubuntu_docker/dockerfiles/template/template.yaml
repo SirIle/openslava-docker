@@ -1,0 +1,44 @@
+# Name of the orchestrated entity
+name: template
+
+# For now target the Vagrant-host
+ships:
+  vagrant-docker: {ip: 10.10.10.30}
+
+services:
+  core:
+    image: test/core
+    instances:
+      core:
+        ship: vagrant-docker
+        ports: {ssh: '22:1000', elasticsearch:  9200, kibana: 80 , consului: 8500}
+        volumes:
+          /etc/localtime: /etc/localtime
+          /etc/timezone: /etc/timezone
+        lifecycle:
+          running: [{type: tcp, port: consului}]
+        dns: localhost
+  # Name of the service
+  template:
+    # Name of the image to provision
+    image: test/template
+    instances:
+      # Name of the instance
+      template1:
+        ship: vagrant-docker
+        # In which port should the ssh service be exposed
+        ports: {ssh: '22:1001'}
+        # The container requires core-container to be running
+        links:
+            core: core
+        # Volumes to expose to the container. First two are so that the
+        # clock is in the same time as the host. Third one is for example projects
+        volumes:
+          /etc/localtime: /etc/localtime
+          /etc/timezone: /etc/timezone
+          /root/Projects: /home/vagrant/Projects
+        # This is used to decide when the container has started
+        lifecycle:
+          running: [{type: tcp, port: ssh}]
+        # DNS setting. Tells the container to default to Consul-based DNS
+        dns: localhost
