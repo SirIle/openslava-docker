@@ -1,0 +1,22 @@
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+ENV["VAGRANT_DEFAULT_PROVIDER"] = "docker"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
+
+  # plugin conflict
+  #if Vagrant.has_plugin?("vagrant-vbguest") then
+  config.vbguest.auto_update = false
+  #end
+
+  config.vm.define "registry" do |app|
+    app.vm.provider "docker" do |d|
+      d.image = "registry"
+      d.name = "registry"
+      d.ports = ["5000:5000"]
+    end
+  end
+
+end
