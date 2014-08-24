@@ -5,7 +5,7 @@ ships:
 
 services:
   core:
-    image: test/core
+    image: registry.local/core
     instances:
       core:
         ship: vagrant-docker
@@ -17,7 +17,7 @@ services:
           running: [{type: tcp, port: consului}]
         dns: localhost
   opscenter:
-    image: test/opscenter
+    image: registry.local/opscenter
     requires: [core]
     instances:
       opscenter:
@@ -32,7 +32,7 @@ services:
           running: [{type: tcp, port: agent}]
         dns: localhost
   cassandra:
-    image: test/cassandra
+    image: registry.local/cassandra
     requires: [core]
     instances:
       cassandra1:

@@ -32,3 +32,5 @@
       service: name=docker state=restarted
     - name: install maestro-ng
       pip: name='git+git://github.com/sirile/maestro-ng#egg=maestro'
+    - name: add local docker-registry to hosts-file
+      lineinfile: dest=/etc/hosts line="10.10.10.100  registry.local"
