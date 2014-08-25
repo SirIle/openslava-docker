@@ -5,7 +5,7 @@ ships:
 
 services:
   node:
-    image: registry.local/node
+    image: registry.local/node:latest
     instances:
       node1:
         ship: vagrant-docker
