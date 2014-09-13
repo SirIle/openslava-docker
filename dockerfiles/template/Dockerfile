@@ -1,9 +1,12 @@
 # Example Dockerfile that can be used as a template
-FROM sirile/ubuntu:0.7
+FROM sirile/ubuntu:0.8
 MAINTAINER Ilkka Anttonen
 
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
+
+# Add the Consul start script so that the IP address can be resolved
+ADD files/startConsul.sh /usr/local/bin/startConsul.sh
 
 # Add the consul configuration for DNS
 ADD files/config-consul.json /etc/consul.d/config-consul.json

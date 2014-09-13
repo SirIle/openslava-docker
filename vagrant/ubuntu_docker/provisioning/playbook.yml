@@ -10,10 +10,12 @@
       apt: pkg=htop
     - name: make sure pip is installed
       apt: pkg=python-pip
+    - name: make sure conntrack is installed
+      apt: pkg=conntrack
     - name: configure tmux
       shell: creates=~vagrant/.tmux.conf echo new-session > ~vagrant/.tmux.conf
     - name: force colorful prompt
-      shell: sed -i -e 's,#force_color_prompt,force_color_prompt,g' ~vagrant/.bashrc
+      lineinfile: dest=~vagrant/.bashrc regexp="^#force_color_prompt" line=force_color_prompt=yes
     - name: add apt_key for docker
       apt_key: url=https://get.docker.io/gpg
     - name: add repository for docker
@@ -27,10 +29,12 @@
     - name: make sure nodejs is installed
       apt: pkg=nodejs
     - name: modify docker startup command
-      shell: sed -i -e 's,#DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4",DOCKER_OPTS="-H tcp://10.10.10.30:4243 -H unix:///var/run/docker.sock",g' /etc/default/docker
+      lineinfile: dest=/etc/default/docker regexp="^#DOCKER_OPTS=" line='DOCKER_OPTS="-H tcp://10.10.10.30:4243 -H unix:///var/run/docker.sock"'
     - name: restart docker service
       service: name=docker state=restarted
     - name: install maestro-ng
       pip: name='git+git://github.com/sirile/maestro-ng#egg=maestro'
+    - name: install weave
+      get_url: url=https://raw.githubusercontent.com/zettio/weave/master/weaver/weave dest=/usr/local/bin/weave mode=0111
     - name: add local docker-registry to hosts-file
       lineinfile: dest=/etc/hosts line="10.10.10.100  registry.local"

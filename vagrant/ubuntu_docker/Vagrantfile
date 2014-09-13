@@ -20,6 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "../../dockerfiles/", "/home/vagrant/dockerfiles"
   config.vm.synced_folder "../../maestro/", "/home/vagrant/maestro"
+  config.vm.synced_folder "../../weave/", "/home/vagrant/weave"
   config.vm.synced_folder "~/Projects/", "/home/vagrant/Projects"
 
   config.vm.provider :virtualbox do |vb|

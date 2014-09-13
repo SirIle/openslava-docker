@@ -1,5 +1,5 @@
 # Create a docker image to run Cassandra
-FROM sirile/oraclejre:0.7
+FROM sirile/oraclejre:0.8
 MAINTAINER Ilkka Anttonen
 
 # Add the repository for Cassandra
@@ -15,6 +15,9 @@ ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 
 # Add the rsyslog configuration for log aggregation
 ADD files/rsyslog.conf /etc/rsyslog.conf
+
+# Add the Consul start script so that the IP address can be resolved
+ADD files/startConsul.sh /usr/local/bin/startConsul.sh
 
 # Add the consul configuration for DNS and the services
 ADD files/config-consul.json /etc/consul.d/config-consul.json

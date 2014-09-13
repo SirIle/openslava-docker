@@ -1,5 +1,5 @@
 # Create a docker image to run core services Consul, Elasticsearch, Logstash and Kibana
-FROM sirile/oraclejre:0.7
+FROM sirile/oraclejre:0.8
 MAINTAINER Ilkka Anttonen
 
 # Set up Consul UI
@@ -21,6 +21,12 @@ RUN rm -rf /tmp/*
 RUN sed -i "s/elasticsearch: \"http:\/\/\"+window.location.hostname+\":9200\",/elasticsearch: \"http:\/\/10.10.10.30:9200\",/g"  /usr/share/nginx/html/config.js
 # Set logstash as the default dashboard in Kibana
 RUN mv /usr/share/nginx/html/app/dashboards/logstash.json /usr/share/nginx/html/app/dashboards/default.json
+
+# Add the Consul start script so that the IP address can be resolved
+ADD files/startConsul.sh /usr/local/bin/startConsul.sh
+
+# Add the rsyslog-configuration file
+ADD files/rsyslog.conf /etc/rsyslog.conf
 
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf

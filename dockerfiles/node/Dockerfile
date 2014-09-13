@@ -1,5 +1,5 @@
 # Create a docker image to run core services Consul, Elasticsearch, Logstash and Kibana
-FROM sirile/node:0.7
+FROM sirile/node:0.8
 MAINTAINER Ilkka Anttonen
 
 # Install CoffeeScript
@@ -10,6 +10,9 @@ RUN npm install -g iced-coffee-script
 
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
+
+# Add the Consul start script so that the IP address can be resolved
+ADD files/startConsul.sh /usr/local/bin/startConsul.sh
 
 # Add the consul configuration for DNS
 ADD files/config-consul.json /etc/consul.d/config-consul.json

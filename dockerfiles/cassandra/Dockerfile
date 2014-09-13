@@ -1,5 +1,5 @@
 # Create a docker image to run Cassandra
-FROM sirile/oraclejre:0.7
+FROM sirile/oraclejre:0.8
 MAINTAINER Ilkka Anttonen
 
 # Add the repository for Cassandra
@@ -15,6 +15,9 @@ RUN apt-get install -y dsc20 python-cql datastax-agent sysstat
 ADD files/cassandra.yaml /etc/cassandra/cassandra.yaml
 ADD files/cassandra-env.sh /etc/cassandra/cassandra-env.sh
 
+# Copy the start file in place so that listen to address is correct
+ADD files/startCassandra.sh /usr/local/bin/startCassandra.sh
+
 # Configure the address of opscenter (used if agents are enabled in supervisord.conf)
 RUN echo "stomp_interface: opscenter.service.consul" | tee -a /etc/datastax-agent/address.yaml
 
@@ -23,6 +26,9 @@ ADD files/rsyslog.conf /etc/rsyslog.conf
 
 # Add the supervisor configuration (last so it can be changed without full rebuild)
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
+
+# Add the Consul start script so that the IP address can be resolved
+ADD files/startConsul.sh /usr/local/bin/startConsul.sh
 
 # Add the consul configuration for DNS and the services
 ADD files/config-consul.json /etc/consul.d/config-consul.json
