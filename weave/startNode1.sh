@@ -15,7 +15,7 @@ echo "OpsCenter started, sleeping a while"
 sleep 20
 # Cassandra1
 sudo weave run 10.0.1.2/24 -t -p 9160:9160 -p 1021:22 --dns 127.0.0.1 \
--h cassandra1 --link core:core -v /etc/localtime:/etc/localtim:ro \
+-h cassandra1 --link core:core -v /etc/localtime:/etc/localtime:ro \
 -v /etc/timezone:/etc/timezone:ro -i registry.local/cassandra
 echo "Cassandra1 started, sleeping a while"
 sleep 20
