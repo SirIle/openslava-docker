@@ -3,13 +3,12 @@
 sudo weave launch 10.0.0.1/16
 # Core
 sudo weave run 10.0.1.1/24 -t -p 1000:22 -p 80:80 -p 8500:8500 -p 9200:9200 \
---dns 127.0.0.1 -h core --name core -v /etc/localtime:/etc/locatime -v /etc/timezone:/etc/timezone \
--i registry.local/core
+--dns 127.0.0.1 -h core --name core -v /etc/localtime:/etc/localtime -i registry.local/core
 echo "Core started, sleeping a while"
 sleep 10
 # OpsCenter
 sudo weave run 10.0.1.10/24 -t -p 1121:22 -p 8888:8888 --dns 127.0.0.1 -h opscenter \
---link core:core -v /etc/localtime:/etc/locatime -i registry.local/opscenter
+--link core:core -v /etc/localtime:/etc/localtime -i registry.local/opscenter
 echo "OpsCenter started, sleeping a while"
 sleep 20
 # Cassandra1
