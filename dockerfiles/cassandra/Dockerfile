@@ -8,7 +8,7 @@ RUN curl -L http://debian.datastax.com/debian/repo_key | apt-key add -
 RUN apt-get update
 
 # Install and configure Cassandra
-RUN apt-get install -y dsc20 python-cql datastax-agent sysstat
+RUN apt-get install -y dsc21 python-cql datastax-agent sysstat
 #RUN ln -s /usr/share/java/jna.jar /usr/share/cassandra/lib
 
 # Copy the configuration files into place
