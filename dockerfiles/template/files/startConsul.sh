@@ -4,4 +4,8 @@ if [ -z $IP  ]
 then
   IP=`hostname -i`
 fi
-exec /usr/local/bin/consul agent -advertise $IP -join=core -data-dir /tmp/consul -config-dir /etc/consul.d -ui-dir /opt/consul_ui
+if [ -z $DC ]
+then
+  DC=DC1
+fi
+exec /usr/local/bin/consul agent -advertise $IP -join=core -dc $DC -data-dir /tmp/consul -config-dir /etc/consul.d -ui-dir /opt/consul_ui

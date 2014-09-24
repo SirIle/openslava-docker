@@ -29,7 +29,7 @@
     - name: make sure nodejs is installed
       apt: pkg=nodejs
     - name: modify docker startup command
-      lineinfile: dest=/etc/default/docker regexp="^#DOCKER_OPTS=" line='DOCKER_OPTS="-H tcp://10.10.10.30:4243 -H unix:///var/run/docker.sock"'
+      lineinfile: dest=/etc/default/docker regexp="^#DOCKER_OPTS=" line='DOCKER_OPTS="-H tcp://{{ ansible_eth1.ipv4.address }}:4243 -H unix:///var/run/docker.sock"'
     - name: restart docker service
       service: name=docker state=restarted
     - name: install maestro-ng

@@ -8,7 +8,7 @@ RUN curl -L http://debian.datastax.com/debian/repo_key | apt-key add -
 RUN apt-get update
 
 # Install and configure Cassandra
-RUN apt-get install -y dsc20 python-cql datastax-agent sysstat
+RUN apt-get install -y dsc21 python-cql datastax-agent sysstat
 #RUN ln -s /usr/share/java/jna.jar /usr/share/cassandra/lib
 
 # Copy the configuration files into place
@@ -19,7 +19,7 @@ ADD files/cassandra-env.sh /etc/cassandra/cassandra-env.sh
 ADD files/startCassandra.sh /usr/local/bin/startCassandra.sh
 
 # Configure the address of opscenter (used if agents are enabled in supervisord.conf)
-RUN echo "stomp_interface: opscenter.service.consul" | tee -a /etc/datastax-agent/address.yaml
+RUN echo "stomp_interface: opscenter.service.west.consul" | tee -a /etc/datastax-agent/address.yaml
 
 # Add the rsyslog-configuration file
 ADD files/rsyslog.conf /etc/rsyslog.conf
