@@ -4,7 +4,7 @@ First start weave in one of the nodes like this (node1):
 Make sure that the containers have been built (by running the command
 ./buildContainers.sh in ~/dockerfiles folder).
 
-Containers can be launched via the script in ~/weaver directory:
+Containers can be launched via the script in ~/weave directory:
   ./startNode1.sh
 
 They can also be started individually.
