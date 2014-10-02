@@ -15,3 +15,8 @@ the interface "ethwe" exists and the IP address provided by it is used. If
 no such interface is found, then the IP address is obtained by using
 "hostname -i" which gives the Docker internal IP. This way the containers should
 work both in weaver and normal environments.
+
+Joining the clusters (for example on node2)
+  consul join -wan 10.0.1.1
+
+Restart Cassandra on one of the nodes (for example Cassandra4)
