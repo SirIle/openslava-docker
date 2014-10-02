@@ -9,7 +9,7 @@ services:
     instances:
       node1:
         ship: vagrant-docker
-        ports: {ssh: '22:1041'}
+        ports: {ssh: '22:1001'}
         links:
             core: core
         volumes:
