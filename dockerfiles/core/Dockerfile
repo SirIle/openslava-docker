@@ -18,7 +18,8 @@ RUN apt-get install -y nginx-full
 RUN (cd /tmp && wget --no-check-certificate http://download.elasticsearch.org/kibana/kibana/kibana-3.0.1.zip -O pkg.zip && unzip pkg.zip && cd kibana-* && cp -rf ./* /usr/share/nginx/html/)
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -rf /tmp/*
-RUN sed -i "s/elasticsearch: \"http:\/\/\"+window.location.hostname+\":9200\",/elasticsearch: \"http:\/\/10.10.10.30:9200\",/g"  /usr/share/nginx/html/config.js
+# Copy the nginx start file so that the IP of the Dockerhost can be set 
+ADD files/startNginx.sh /usr/local/bin/startNginx.sh
 # Set logstash as the default dashboard in Kibana
 RUN mv /usr/share/nginx/html/app/dashboards/logstash.json /usr/share/nginx/html/app/dashboards/default.json
 

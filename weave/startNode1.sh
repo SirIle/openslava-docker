@@ -4,7 +4,7 @@ sudo weave launch 10.0.0.1/16
 # Core
 sudo weave run 10.0.1.1/22 -t -p 1000:22 -p 80:80 -p 8500:8500 -p 9200:9200 \
 --dns 127.0.0.1 -h core --name core -v /etc/localtime:/etc/localtime:ro \
--v /etc/timezone:/etc/timezone:ro -e DC=west -i registry.local/core
+-v /etc/timezone:/etc/timezone:ro -e DC=west -e DOCKER_HOST_IP=10.10.10.30 -i registry.local/core
 echo "Core started, sleeping a while"
 sleep 10
 # OpsCenter
