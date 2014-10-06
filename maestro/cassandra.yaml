@@ -68,3 +68,19 @@ services:
         lifecycle:
           running: [{type: tcp, port: agent}]
         dns: localhost
+  node:
+    image: registry.local/node:latest
+    requires: [core]
+    instances:
+      node1:
+        ship: vagrant-docker
+        ports: {ssh: '22:1001'}
+        links:
+            core: core
+        volumes:
+          /etc/localtime: /etc/localtime
+          /etc/timezone: /etc/timezone
+          /root/Projects: /home/vagrant/Projects
+        lifecycle:
+          running: [{type: tcp, port: ssh}]
+        dns: localhost
