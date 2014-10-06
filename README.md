@@ -39,7 +39,7 @@ vagrant up
 vagrant ssh
 ```
 
-You can also connect to the running node1 with other terminals. It has the host only network IP of 10.10.10.30. You need to use the Vgarant ssh key for the connection. Instructions for doing this for PuTTY can be found for example from https://blog.accenture.com/ilkka_anttonen/2014/04/15/connecting-to-vagrant-vm-on-windows-using-putty/.
+You can also connect to the running node1 with other terminals. It has the host only network IP of 10.10.10.30. You need to use the Vagrant ssh key for the connection. Instructions for doing this for PuTTY can be found from https://blog.accenture.com/ilkka_anttonen/2014/04/15/connecting-to-vagrant-vm-on-windows-using-putty/.
 
 This launches the node1 virtual machine and provisions it using Ansible. You can use `tmux` for multiple sessions.
 
