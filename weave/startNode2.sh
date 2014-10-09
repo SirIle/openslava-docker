@@ -17,3 +17,4 @@ sleep 20
 sudo weave run 10.0.2.3/22 -t -p 1022:22 --dns 127.0.0.1 \
 -h cassandra5 --link core:core -v /etc/localtime:/etc/localtime:ro \
 -v /etc/timezone:/etc/timezone:ro -e DC=east -i registry.local/cassandra
+echo "Cassandra5 started"

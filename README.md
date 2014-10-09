@@ -122,6 +122,11 @@ After a while the nodes have joined to the same ring. This can be checked with
 ssh root@localhost -p 1021 'nodetool status'
 ```
 
+If you want to run cqlsh on one of the Cassandra containers, it can be done with
+```
+ssh root@localhost -p 1021 -t cqlsh
+```
+
 ### Cleanup
 
 To stop the running containers and clear out the instances use
