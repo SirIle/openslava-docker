@@ -796,8 +796,8 @@ body .markdown-body
 
 <p>You can check out the project from InnerSource with</p>
 
-<pre><code>git clone git@innersource.accenture.com:eti-nordic-playground/eti-nordic-playground.git
-</code></pre>
+<div class="highlight highlight-bash"><pre>git clone git@innersource.accenture.com:eti-nordic-playground/eti-nordic-playground.git
+</pre></div>
 
 <p>This README document assumes that <em>eti-nordic-playground</em> directory is the root.</p>
 
@@ -808,7 +808,9 @@ body .markdown-body
 <li>maestro (MaestroNG orchestration files)</li>
 <li>vagrant (contains the Vagrant configuration files)</li>
 <li>weave (contains the shell scripts for running containers and weave)</li>
-</ul><h2>
+</ul>
+
+<h2>
 <a name="user-content-prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
 
 <p>The environment has been tested in Windows 7 and Mac OS X. It should also run in Linux.</p>
@@ -818,11 +820,15 @@ body .markdown-body
 <ul>
 <li>VirtualBox (4.3.16)</li>
 <li>Vagrant (1.6.5)</li>
-</ul><p>On OS X and Linux you also need</p>
+</ul>
+
+<p>On OS X and Linux you also need</p>
 
 <ul>
 <li>Ansible (1.7.2)</li>
-</ul><p>The Vagrant scripts also assume that you have a directory called <em>~/Projects</em> created. It can be empty. On Windows, it should be <em>c:\users&lt;username&gt;\Projects</em> and in other operating systems under your home directory.</p>
+</ul>
+
+<p>The Vagrant scripts also assume that you have a directory called <em>~/Projects</em> created. It can be empty. On Windows, it should be <em>c:\users&lt;username&gt;\Projects</em> and in other operating systems under your home directory.</p>
 
 <h2>
 <a name="user-content-running-in-one-node-with-maestrong-orchestration" class="anchor" href="#running-in-one-node-with-maestrong-orchestration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running in one node with MaestroNG orchestration</h2>
@@ -832,12 +838,12 @@ body .markdown-body
 
 <p>Start and enter node1</p>
 
-<pre><code>cd vagrant/ubuntu_docker
+<div class="highlight highlight-bash"><pre><span class="nb">cd </span>vagrant/ubuntu_docker
 vagrant up
 vagrant ssh
-</code></pre>
+</pre></div>
 
-<p>You can also connect to the running node1 with other terminals. It has the host only network IP of 10.10.10.30. You need to use the Vgarant ssh key for the connection. Instructions for doing this for PuTTY can be found for example from <a href="https://blog.accenture.com/ilkka_anttonen/2014/04/15/connecting-to-vagrant-vm-on-windows-using-putty/">https://blog.accenture.com/ilkka_anttonen/2014/04/15/connecting-to-vagrant-vm-on-windows-using-putty/</a>.</p>
+<p>You can also connect to the running node1 with other terminals. It has the host only network IP of 10.10.10.30. You need to use the Vagrant ssh key for the connection. Instructions for doing this for PuTTY can be found from <a href="https://blog.accenture.com/ilkka_anttonen/2014/04/15/connecting-to-vagrant-vm-on-windows-using-putty/">https://blog.accenture.com/ilkka_anttonen/2014/04/15/connecting-to-vagrant-vm-on-windows-using-putty/</a>.</p>
 
 <p>This launches the node1 virtual machine and provisions it using Ansible. You can use <code>tmux</code> for multiple sessions.</p>
 
@@ -846,18 +852,18 @@ vagrant ssh
 
 <p>Build the container images</p>
 
-<pre><code>cd ~/dockerfiles
+<div class="highlight highlight-bash"><pre><span class="nb">cd</span> ~/dockerfiles
 ./buildContainers.sh
-</code></pre>
+</pre></div>
 
 <h3>
 <a name="user-content-running-the-containers" class="anchor" href="#running-the-containers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the containers</h3>
 
 <p>Use MaestroNG to start the containers</p>
 
-<pre><code>cd ~/maestro
+<div class="highlight highlight-bash"><pre><span class="nb">cd</span> ~/maestro
 maestro -f cassandra.yaml start
-</code></pre>
+</pre></div>
 
 <h2>
 <a name="user-content-running-in-two-nodes-with-weave-and-registry" class="anchor" href="#running-in-two-nodes-with-weave-and-registry" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running in two nodes with Weave and registry</h2>
@@ -867,20 +873,20 @@ maestro -f cassandra.yaml start
 
 <p>Start node1</p>
 
-<pre><code>cd vagrant/ubuntu_docker
+<div class="highlight highlight-bash"><pre><span class="nb">cd </span>vagrant/ubuntu_docker
 vagrant up
-</code></pre>
+</pre></div>
 
 <p>Start node2</p>
 
-<pre><code>vagrant up node2
-</code></pre>
+<div class="highlight highlight-bash"><pre>vagrant up node2
+</pre></div>
 
 <p>Start docker registry</p>
 
-<pre><code>cd ../ubuntu_docker_registry
+<div class="highlight highlight-bash"><pre><span class="nb">cd</span> ../ubuntu_docker_registry
 vagrant up
-</code></pre>
+</pre></div>
 
 <h3>
 <a name="user-content-building-and-pushing-the-images" class="anchor" href="#building-and-pushing-the-images" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building and pushing the images</h3>
@@ -897,44 +903,49 @@ vagrant up
 
 <p>On node1 use the shell script to start containers</p>
 
-<pre><code>cd ~/weave
+<div class="highlight highlight-bash"><pre><span class="nb">cd</span> ~/weave
 ./startNode1.sh
-</code></pre>
+</pre></div>
 
 <h3>
 <a name="user-content-running-containers-in-node2" class="anchor" href="#running-containers-in-node2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running containers in node2</h3>
 
 <p>On node2 use the shell script to start containers. This will pull them from the local registry first.</p>
 
-<pre><code>cd ~/weave
+<div class="highlight highlight-bash"><pre><span class="nb">cd</span> ~/weave
 ./startNode2.sh
-</code></pre>
+</pre></div>
 
 <h3>
 <a name="user-content-connecting-the-nodes" class="anchor" href="#connecting-the-nodes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connecting the nodes</h3>
 
 <p>On either of the nodes, connect to the <em>core</em> instance and join the Consul master nodes. For example on node2</p>
 
-<pre><code>ssh root@localhost -p 1000 'consul join -wan 10.0.1.1'
-</code></pre>
+<div class="highlight highlight-bash"><pre>ssh root@localhost -p <span class="m">1000</span> <span class="s1">'consul join -wan 10.0.1.1'</span>
+</pre></div>
 
 <p>Restart Cassandra instance on that node so that it reconnects to the other datacenter</p>
 
-<pre><code>ssh root@localhost -p 1021 'supervisorctl restart cassandra'
-</code></pre>
+<div class="highlight highlight-bash"><pre>ssh root@localhost -p <span class="m">1021</span> <span class="s1">'supervisorctl restart cassandra'</span>
+</pre></div>
 
 <p>After a while the nodes have joined to the same ring. This can be checked with</p>
 
-<pre><code>ssh root@localhost -p 1021 'nodetool status'
-</code></pre>
+<div class="highlight highlight-bash"><pre>ssh root@localhost -p <span class="m">1021</span> <span class="s1">'nodetool status'</span>
+</pre></div>
+
+<p>If you want to run cqlsh on one of the Cassandra containers, it can be done with</p>
+
+<div class="highlight highlight-bash"><pre>ssh root@localhost -p <span class="m">1021</span> -t cqlsh
+</pre></div>
 
 <h3>
 <a name="user-content-cleanup" class="anchor" href="#cleanup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cleanup</h3>
 
 <p>To stop the running containers and clear out the instances use</p>
 
-<pre><code>~/weave/stopNode.sh
-</code></pre>
+<div class="highlight highlight-bash"><pre>~/weave/stopNode.sh
+</pre></div>
 
 <h2>
 <a name="user-content-checking-that-everything-is-working" class="anchor" href="#checking-that-everything-is-working" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking that everything is working</h2>
@@ -942,10 +953,12 @@ vagrant up
 <p>Different services can be reached with a browser from the host. Services can be found from:</p>
 
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>Service</th>
 <th>URL</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>Logstash on node1</td>
@@ -964,14 +977,18 @@ vagrant up
 <td><a href="http://10.10.10.30:8888">http://10.10.10.30:8888</a></td>
 </tr>
 </tbody>
-</table><p>Inside the Docker node the different containers can be accessed using ssh (username/password is root/root):</p>
+</table>
+
+<p>Inside the Docker node the different containers can be accessed using ssh (username/password is root/root):</p>
 
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>Container</th>
 <th>Ssh port</th>
 <th>Weave IP</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>Core</td>
@@ -1019,36 +1036,37 @@ vagrant up
 <td>10.0.2.3</td>
 </tr>
 </tbody>
-</table><p>The command to connect to for example Cassandra1 on node1 is:</p>
+</table>
 
-<pre><code>ssh root@localhost -p 1021
-</code></pre>
+<p>The command to connect to for example Cassandra1 on node1 is:</p>
+
+<div class="highlight highlight-bash"><pre>ssh root@localhost -p 1021
+</pre></div>
 
 <h3>
 <a name="user-content-creating-a-keyspace-and-few-test-rows" class="anchor" href="#creating-a-keyspace-and-few-test-rows" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a keyspace and few test rows</h3>
 
 <p>Ssh into one of the Cassandra containers and start up cqlsh</p>
 
-<pre><code>ssh root@localhost -p 1021
-cqlsh
-</code></pre>
+<div class="highlight highlight-bash"><pre>ssh root@localhost -p <span class="m">1021</span> -t cqlsh
+</pre></div>
 
 <p>Enter the following (you can exit cqlsh with either exit or ctrl+d)</p>
 
-<pre><code>CREATE KEYSPACE demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
+<div class="highlight highlight-sql"><pre><span class="k">CREATE</span> <span class="n">KEYSPACE</span> <span class="n">demo</span> <span class="k">WITH</span> <span class="n">REPLICATION</span> <span class="o">=</span> <span class="err">{</span> <span class="s1">'class'</span> <span class="p">:</span> <span class="s1">'SimpleStrategy'</span><span class="p">,</span> <span class="s1">'replication_factor'</span> <span class="p">:</span> <span class="mi">2</span> <span class="err">}</span><span class="p">;</span>
 
-CREATE TABLE demo.users ( 
-    userid text,
-    firstname text,
-    lastname text, 
-    PRIMARY KEY (userid) 
-);
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">demo</span><span class="p">.</span><span class="n">users</span> <span class="p">(</span> 
+    <span class="n">userid</span> <span class="nb">text</span><span class="p">,</span>
+    <span class="n">firstname</span> <span class="nb">text</span><span class="p">,</span>
+    <span class="n">lastname</span> <span class="nb">text</span><span class="p">,</span> 
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">userid</span><span class="p">)</span> 
+<span class="p">);</span>
 
-INSERT INTO demo.users (userid, firstname, lastname) VALUES ('ile','Ilkka','Anttonen');
-INSERT INTO demo.users (userid, firstname, lastname) VALUES ('toinen','Some','User');
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">demo</span><span class="p">.</span><span class="n">users</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">lastname</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'ile'</span><span class="p">,</span><span class="s1">'Ilkka'</span><span class="p">,</span><span class="s1">'Anttonen'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">demo</span><span class="p">.</span><span class="n">users</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">lastname</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'toinen'</span><span class="p">,</span><span class="s1">'Some'</span><span class="p">,</span><span class="s1">'User'</span><span class="p">);</span>
 
-SELECT * FROM demo.users where userid = 'ile';
-</code></pre>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">demo</span><span class="p">.</span><span class="n">users</span> <span class="k">where</span> <span class="n">userid</span> <span class="o">=</span> <span class="s1">'ile'</span><span class="p">;</span>
+</pre></div>
 
 <p>Status of the Cassandra ring can be displayed with <code>nodetool status</code>.</p>
 
@@ -1057,27 +1075,27 @@ SELECT * FROM demo.users where userid = 'ile';
 
 <p>Connect to the node container</p>
 
-<pre><code>ssh root@localhost -p 1001
-</code></pre>
+<div class="highlight highlight-bash"><pre>ssh root@localhost -p 1001
+</pre></div>
 
 <p>Install the <em>node-cassandra-cql</em> module with npm</p>
 
-<pre><code>npm install node-cassandra-cql
-</code></pre>
+<div class="highlight highlight-bash"><pre>npm install node-cassandra-cql
+</pre></div>
 
 <p>Create the following program, use your favourite editor and name the file cql.iced</p>
 
-<pre><code>cql = require 'node-cassandra-cql'
-client = new cql.Client({hosts:['cassandra.service.consul'],keyspace: 'demo'})
-client.execute 'SELECT * FROM demo.users where userid = ?', ['ile'], (err, result) -&gt;
-  console.log 'Result: ' + result.rows[0].firstname
-  process.exit 0
-</code></pre>
+<div class="highlight highlight-coffeescript"><pre><span class="nv">cql = </span><span class="nx">require</span> <span class="s">'node-cassandra-cql'</span>
+<span class="nv">client = </span><span class="k">new</span> <span class="nx">cql</span><span class="p">.</span><span class="nx">Client</span><span class="p">({</span><span class="nx">hosts</span><span class="o">:</span><span class="p">[</span><span class="s">'cassandra.service.consul'</span><span class="p">],</span><span class="nv">keyspace: </span><span class="s">'demo'</span><span class="p">})</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">execute</span> <span class="s">'SELECT * FROM demo.users where userid = ?'</span><span class="p">,</span> <span class="p">[</span><span class="s">'ile'</span><span class="p">],</span> <span class="nf">(err, result) -&gt;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">'Result: '</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">firstname</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span> <span class="mi">0</span>
+</pre></div>
 
 <p>Now this program can be run</p>
 
-<pre><code>iced cql.iced
-</code></pre>
+<div class="highlight highlight-bash"><pre>iced cql.iced
+</pre></div>
 
 <p>You should get the result if you have previously created the test data as described in previous step.</p>
 
@@ -1086,5 +1104,6 @@ client.execute 'SELECT * FROM demo.users where userid = ?', ['ile'], (err, resul
 
 <p>To stop the containers and clean out unused images and remove instances use</p>
 
-<pre><code>/vagrant/scripts/cleanDocker.sh
-</code></pre></article></body></html>
+<div class="highlight highlight-bash"><pre>/vagrant/scripts/cleanDocker.sh
+</pre></div>
+</article></body></html>
