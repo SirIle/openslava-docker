@@ -90,7 +90,8 @@ vagrant up
 ### Building and pushing the images
 
 On node1 build the images and push core and cassandra to the local registry
-```
+
+```bash
 cd dockerimages
 ./buildContainers.sh
 ./pushContainers.sh
@@ -192,11 +193,11 @@ Enter the following (you can exit cqlsh with either exit or ctrl+d)
 ```sql
 CREATE KEYSPACE demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
 
-CREATE TABLE demo.users ( 
+CREATE TABLE demo.users (
 	userid text,
 	firstname text,
-	lastname text, 
-	PRIMARY KEY (userid) 
+	lastname text,
+	PRIMARY KEY (userid)
 );
 
 INSERT INTO demo.users (userid, firstname, lastname) VALUES ('ile','Ilkka','Anttonen');
