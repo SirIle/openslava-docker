@@ -1,8 +1,11 @@
+# Core container
+
 This container includes the following:
-	- Consul (runs in bootstrap mode as the Consul master node)
-	- Logstash 1.4.1
+	- Consul 0.4.0 (runs in bootstrap mode as the Consul master node)
+	- Consul UI 0.4.0
+	- Logstash 1.4.2
 	- ElasticSearch 1.1.1
-	- Nginx + Kibana
+	- Nginx + Kibana 3.0.1
 
 Core acts as the place to push the logs to using rsyslog and also
 acts as the base container for Consul. The startup script names the
@@ -10,11 +13,6 @@ container "core" and when it is linked in other containers (using
 the command line switch --link core:core) the other consul agents
 can connect to it using just the hostname "core".
 
-Consul UI can be found from the address http://10.10.10.30:8500/ui
+Consul UI can be found from the address http://10.10.10.30:8500/ui/dist
 
 Kibana UI can be found from the address http://10.10.10.30
-
-TODO:
-	- Configure logstash to read local syslog messages on core
-	- Test that rsyslog can deliver messages from other containers
-	- General: in startup scripts check that core-container is running when starting others

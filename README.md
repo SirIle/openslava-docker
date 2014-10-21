@@ -1,27 +1,31 @@
 # Running the Cassandra cluster example
 
+## Presentation
+
+The accompanying presentation from OpenSlava 2014 can be found from http://www.slideshare.net/IlkkaAnttonen/open-slava-2014ilkkaanttonen.
+
 ## Checking out the project and contents
 
-You can check out the project from InnerSource with
+You can check out the project from GitHub with
 
 ```bash
-git clone git@innersource.accenture.com:eti-nordic-playground/eti-nordic-playground.git
+git clone https://github.com/SirIle/openslava-docker.git <dirname>
 ```
 
-This README document assumes that *eti-nordic-playground* directory is the root.
+This README document assumes that *dirname* directory is the root.
 
 Under it are four relevant directories for setting up and running the container demo:
-  - dockerfiles (contains the script and container descriptors)
+  - dockerfiles (contains the scripts and container descriptors)
   - maestro (MaestroNG orchestration files)
   - vagrant (contains the Vagrant configuration files)
-  - weave (contains the shell scripts for running containers and weave)
+  - weave (contains the shell scripts for running containers and weave networking)
 
 ## Prerequisites
 
 The environment has been tested in Windows 7 and Mac OS X. It should also run in Linux.
 
 Following software has to be installed on the host (tested version numbers in parenthesis):
-  - VirtualBox (4.3.16)
+  - VirtualBox (4.3.18)
   - Vagrant (1.6.5)
 
 On OS X and Linux you also need

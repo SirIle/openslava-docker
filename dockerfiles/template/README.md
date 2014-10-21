@@ -1,3 +1,5 @@
+# Template for containers
+
 This folder contains a template that can be used as a base for new containers.
 
 For clarity it's suggested that the files are renamed to match the actual
@@ -5,7 +7,10 @@ target container, for example buildTemplate.sh would be build<Container>.sh.
 
 Building the core image is not included in the buildTemplate.sh, but it can 
 be built in the core-directory with:
+
+```bash
   sudo docker build -t test/core .
+```
 
 The items that need configuring when defining a new container:
   - template.yaml
@@ -13,7 +18,7 @@ The items that need configuring when defining a new container:
     * Add possible exposed volumes
   - buildTemplate.sh
     * Change the name of the target container, should match the one defined
-      in Template.yaml
+      in template.yaml
   - Dockerfile
     * Add the actual build of the container
     * Add the configuration files that should be transferred

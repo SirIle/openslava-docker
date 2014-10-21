@@ -792,22 +792,27 @@ body .markdown-body
 <a name="user-content-running-the-cassandra-cluster-example" class="anchor" href="#running-the-cassandra-cluster-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the Cassandra cluster example</h1>
 
 <h2>
+<a name="user-content-presentation" class="anchor" href="#presentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Presentation</h2>
+
+<p>The accompanying presentation from OpenSlava 2014 can be found from <a href="http://www.slideshare.net/IlkkaAnttonen/open-slava-2014ilkkaanttonen">http://www.slideshare.net/IlkkaAnttonen/open-slava-2014ilkkaanttonen</a>.</p>
+
+<h2>
 <a name="user-content-checking-out-the-project-and-contents" class="anchor" href="#checking-out-the-project-and-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking out the project and contents</h2>
 
-<p>You can check out the project from InnerSource with</p>
+<p>You can check out the project from GitHub with</p>
 
-<div class="highlight highlight-bash"><pre>git clone git@innersource.accenture.com:eti-nordic-playground/eti-nordic-playground.git
+<div class="highlight highlight-bash"><pre>git clone https://github.com/SirIle/openslava-docker.git &lt;dirname&gt;
 </pre></div>
 
-<p>This README document assumes that <em>eti-nordic-playground</em> directory is the root.</p>
+<p>This README document assumes that <em>dirname</em> directory is the root.</p>
 
 <p>Under it are four relevant directories for setting up and running the container demo:</p>
 
 <ul>
-<li>dockerfiles (contains the script and container descriptors)</li>
+<li>dockerfiles (contains the scripts and container descriptors)</li>
 <li>maestro (MaestroNG orchestration files)</li>
 <li>vagrant (contains the Vagrant configuration files)</li>
-<li>weave (contains the shell scripts for running containers and weave)</li>
+<li>weave (contains the shell scripts for running containers and weave networking)</li>
 </ul>
 
 <h2>
@@ -818,7 +823,7 @@ body .markdown-body
 <p>Following software has to be installed on the host (tested version numbers in parenthesis):</p>
 
 <ul>
-<li>VirtualBox (4.3.16)</li>
+<li>VirtualBox (4.3.18)</li>
 <li>Vagrant (1.6.5)</li>
 </ul>
 
@@ -893,10 +898,10 @@ vagrant up
 
 <p>On node1 build the images and push core and cassandra to the local registry</p>
 
-<pre><code>cd dockerimages
+<div class="highlight highlight-bash"><pre><span class="nb">cd </span>dockerimages
 ./buildContainers.sh
 ./pushContainers.sh
-</code></pre>
+</pre></div>
 
 <h3>
 <a name="user-content-running-containers-in-node1" class="anchor" href="#running-containers-in-node1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running containers in node1</h3>
@@ -1055,11 +1060,11 @@ vagrant up
 
 <div class="highlight highlight-sql"><pre><span class="k">CREATE</span> <span class="n">KEYSPACE</span> <span class="n">demo</span> <span class="k">WITH</span> <span class="n">REPLICATION</span> <span class="o">=</span> <span class="err">{</span> <span class="s1">'class'</span> <span class="p">:</span> <span class="s1">'SimpleStrategy'</span><span class="p">,</span> <span class="s1">'replication_factor'</span> <span class="p">:</span> <span class="mi">2</span> <span class="err">}</span><span class="p">;</span>
 
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">demo</span><span class="p">.</span><span class="n">users</span> <span class="p">(</span> 
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">demo</span><span class="p">.</span><span class="n">users</span> <span class="p">(</span>
     <span class="n">userid</span> <span class="nb">text</span><span class="p">,</span>
     <span class="n">firstname</span> <span class="nb">text</span><span class="p">,</span>
-    <span class="n">lastname</span> <span class="nb">text</span><span class="p">,</span> 
-    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">userid</span><span class="p">)</span> 
+    <span class="n">lastname</span> <span class="nb">text</span><span class="p">,</span>
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">userid</span><span class="p">)</span>
 <span class="p">);</span>
 
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">demo</span><span class="p">.</span><span class="n">users</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">lastname</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'ile'</span><span class="p">,</span><span class="s1">'Ilkka'</span><span class="p">,</span><span class="s1">'Anttonen'</span><span class="p">);</span>
