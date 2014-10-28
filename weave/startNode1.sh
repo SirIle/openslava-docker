@@ -1,6 +1,6 @@
 #!/bin/bash
 # Make sure that weave is running
-sudo weave launch 10.0.0.1/16
+sudo weave launch
 # Core
 sudo weave run 10.0.1.1/22 -t -p 1000:22 -p 80:80 -p 8500:8500 -p 9200:9200 \
 --dns 127.0.0.1 -h core --name core -v /etc/localtime:/etc/localtime:ro \
