@@ -32,9 +32,9 @@
       lineinfile: dest=/etc/default/docker regexp="^#DOCKER_OPTS=" line='DOCKER_OPTS="-H tcp://{{ ansible_eth1.ipv4.address }}:4243 -H unix:///var/run/docker.sock"'
       notify: restart docker
     - name: install maestro-ng
-      pip: name='git+git://github.com/sirile/maestro-ng#egg=maestro'
+      pip: name='git+http://github.com/sirile/maestro-ng#egg=maestro'
     - name: install weave
-      get_url: url=https://raw.githubusercontent.com/zettio/weave/master/weaver/weave dest=/usr/local/bin/weave mode=0111
+      get_url: url=https://raw.githubusercontent.com/zettio/weave/master/weave dest=/usr/local/bin/weave mode=0111
     - name: add local docker-registry to hosts-file
       lineinfile: dest=/etc/hosts line="10.10.10.100  registry.local"
   handlers:

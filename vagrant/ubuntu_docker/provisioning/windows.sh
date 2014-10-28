@@ -40,7 +40,7 @@ if [ ! -f /usr/bin/ansible ]; then
   echo "Installing required python modules."
   pip install paramiko pyyaml jinja2 markupsafe
   echo "Installing Ansible."
-  pip install ansible
+  pip install ansible==1.5.5
 fi
 
 cp /vagrant/${ANSIBLE_HOSTS} ${TEMP_HOSTS} && chmod -x ${TEMP_HOSTS}
