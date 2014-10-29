@@ -1,5 +1,7 @@
+# OpsCenter container
+
 Opscenter is a tool by Datastax for monitoring Cassandra clusters. For
-Opscenter and the Cassandra dock to work, Core has to be running. 
+Opscenter and the Cassandra dock to work, Core has to be running.
 
 Easiest way to start the cluster is by using maestro, example can be found from
 directory above.
@@ -7,7 +9,7 @@ directory above.
 After Opscenter has been started, you can access it using a web browser by
 going to the address:
 
-	10.10.10.30:8888
+	http://10.10.10.30:8888
 
 When Cassandra nodes start, they will automatically start a datastax-client
 which reports status information to Opscenter.
