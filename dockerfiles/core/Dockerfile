@@ -2,6 +2,12 @@
 FROM sirile/oraclejre:0.8
 MAINTAINER Ilkka Anttonen
 
+# Expose the ports
+EXPOSE 22 80 5000 8500 9200 9300
+
+# Start the supervisord
+CMD ["/usr/bin/supervisord"]
+
 # Set up Consul UI
 RUN wget https://dl.bintray.com/mitchellh/consul/0.3.1_web_ui.zip -O /tmp/consul_ui.zip
 RUN unzip /tmp/consul_ui.zip -d /opt/consul_ui
@@ -36,8 +42,5 @@ ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 ADD files/log-consul.json /etc/consul.d/log-consul.json
 ADD files/config-consul.json /etc/consul.d/config-consul.json
 
-# Expose the ports
-EXPOSE 22 80 5000 8500 9200 9300
-
-# Start the supervisord
-CMD ["/usr/bin/supervisord"]
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

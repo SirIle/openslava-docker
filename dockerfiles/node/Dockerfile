@@ -2,6 +2,12 @@
 FROM sirile/node:0.8
 MAINTAINER Ilkka Anttonen
 
+# Expose the port(s)
+EXPOSE 22
+
+# Start the supervisord
+CMD ["/usr/bin/supervisord"]
+
 # Install CoffeeScript
 RUN npm install -g coffee-script
 
@@ -20,8 +26,5 @@ ADD files/config-consul.json /etc/consul.d/config-consul.json
 # Add the rsyslog configuration for log aggregation
 ADD files/rsyslog.conf /etc/rsyslog.conf
 
-# Expose the port(s)
-EXPOSE 22
-
-# Start the supervisord
-CMD ["/usr/bin/supervisord"]
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
