@@ -1,12 +1,6 @@
 # Example Dockerfile that can be used as a template
-FROM sirile/ubuntu:0.8
+FROM sirile/ubuntu:0.9
 MAINTAINER Ilkka Anttonen
-
-# Expose the port(s)
-EXPOSE 22
-
-# Start the supervisord
-CMD ["/usr/bin/supervisord"]
 
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
@@ -24,3 +18,9 @@ ADD files/rsyslog.conf /etc/rsyslog.conf
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Expose the port(s)
+EXPOSE 22
+
+# Start the supervisord
+CMD ["/usr/bin/supervisord"]

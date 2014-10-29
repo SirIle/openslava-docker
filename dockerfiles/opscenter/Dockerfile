@@ -1,12 +1,6 @@
 # Create a docker image to run Cassandra
-FROM sirile/oraclejre:0.8
+FROM sirile/oraclejre:0.9
 MAINTAINER Ilkka Anttonen
-
-# Expose the ports
-EXPOSE 8888 22 61620
-
-# Start the supervisord
-CMD ["/usr/bin/supervisord"]
 
 # Add the repository for Cassandra
 RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
@@ -35,3 +29,9 @@ ADD files/Test_Cluster.conf /etc/opscenter/clusters/Test_Cluster.conf
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Expose the ports
+EXPOSE 8888 22 61620
+
+# Start the supervisord
+CMD ["/usr/bin/supervisord"]

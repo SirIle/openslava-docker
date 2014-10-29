@@ -1,12 +1,6 @@
 # Create a docker image to run core services Consul, Elasticsearch, Logstash and Kibana
-FROM sirile/node:0.8
+FROM sirile/node:0.9
 MAINTAINER Ilkka Anttonen
-
-# Expose the port(s)
-EXPOSE 22
-
-# Start the supervisord
-CMD ["/usr/bin/supervisord"]
 
 # Install CoffeeScript
 RUN npm install -g coffee-script
@@ -28,3 +22,9 @@ ADD files/rsyslog.conf /etc/rsyslog.conf
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Expose the port(s)
+EXPOSE 22
+
+# Start the supervisord
+CMD ["/usr/bin/supervisord"]
