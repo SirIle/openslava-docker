@@ -2,6 +2,12 @@
 FROM sirile/oraclejre:0.8
 MAINTAINER Ilkka Anttonen
 
+# Expose the ports
+EXPOSE 9042 9160 22 61621
+
+# Start the supervisord
+CMD ["/usr/bin/supervisord"]
+
 # Add the repository for Cassandra
 RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
 RUN curl -L http://debian.datastax.com/debian/repo_key | apt-key add -
@@ -34,8 +40,5 @@ ADD files/startConsul.sh /usr/local/bin/startConsul.sh
 ADD files/config-consul.json /etc/consul.d/config-consul.json
 ADD files/cassandra-consul.json /etc/consul.d/cassandra-consul.json
 
-# Expose the ports
-EXPOSE 9042 9160 22 61621
-
-# Start the supervisord
-CMD ["/usr/bin/supervisord"]
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

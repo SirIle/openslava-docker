@@ -2,6 +2,12 @@
 FROM sirile/ubuntu:0.8
 MAINTAINER Ilkka Anttonen
 
+# Expose the port(s)
+EXPOSE 22
+
+# Start the supervisord
+CMD ["/usr/bin/supervisord"]
+
 # Set up the supervisor configuration
 ADD files/supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 
@@ -16,8 +22,5 @@ ADD files/example-consul.json /etc/consul.d/example-consul.json
 # Add the rsyslog configuration for log aggregation
 ADD files/rsyslog.conf /etc/rsyslog.conf
 
-# Expose the port(s)
-EXPOSE 22
-
-# Start the supervisord
-CMD ["/usr/bin/supervisord"]
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
