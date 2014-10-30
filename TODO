@@ -1,0 +1,4 @@
+TODO
+ - Check out rsyslog 8 (non polling)
+ - Check out Kibana 4
+ - Update to Ubuntu Utopic (14.10) when the support is better
