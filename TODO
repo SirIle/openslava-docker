@@ -2,3 +2,7 @@ TODO
  - Check out rsyslog 8 (non polling)
  - Check out Kibana 4
  - Update to Ubuntu Utopic (14.10) when the support is better
+
+KNOWN ISSUES
+ - DataStax-agent log harvesting bugs
+ 	* non-standard logging with spaces at the start of lines and random linefeeds
