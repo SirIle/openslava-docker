@@ -31,6 +31,8 @@
     - name: modify docker startup command
       lineinfile: dest=/etc/default/docker regexp="^#DOCKER_OPTS=" line='DOCKER_OPTS="-H tcp://{{ ansible_eth1.ipv4.address }}:4243 -H unix:///var/run/docker.sock"'
       notify: restart docker
+    - name: ensure that user vagrant is in docker group
+      user: name=vagrant append=yes groups=docker
     - name: install maestro-ng
       pip: name='git+http://github.com/sirile/maestro-ng#egg=maestro'
     - name: install weave

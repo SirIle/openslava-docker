@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker build -t test/node .
+docker build -t test/node .
