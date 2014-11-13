@@ -17,7 +17,7 @@
     - name: force colorful prompt
       lineinfile: dest=~vagrant/.bashrc regexp="^#force_color_prompt" line=force_color_prompt=yes
     - name: add apt_key for docker
-      apt_key: url=https://get.docker.io/gpg
+      apt_key: url=https://get.docker.io/gpg validate_certs=no
     - name: add repository for docker
       apt_repository: repo='deb http://get.docker.io/ubuntu docker main'
     - name: make sure docker is installed
@@ -29,14 +29,14 @@
     - name: make sure nodejs is installed
       apt: pkg=nodejs
     - name: modify docker startup command
-      lineinfile: dest=/etc/default/docker regexp="^#DOCKER_OPTS=" line='DOCKER_OPTS="-H tcp://{{ ansible_eth1.ipv4.address }}:4243 -H unix:///var/run/docker.sock"'
+      lineinfile: dest=/etc/default/docker regexp="^DOCKER_OPTS=" insertafter="^#DOCKER_OPTS=" line='DOCKER_OPTS="-H tcp://{{ ansible_eth1.ipv4.address }}:4243 -H unix:///var/run/docker.sock"'
       notify: restart docker
     - name: ensure that user vagrant is in docker group
       user: name=vagrant append=yes groups=docker
     - name: install maestro-ng
       pip: name='git+http://github.com/sirile/maestro-ng#egg=maestro'
     - name: install weave
-      get_url: url=https://raw.githubusercontent.com/zettio/weave/master/weave dest=/usr/local/bin/weave mode=0111
+      get_url: url=https://raw.githubusercontent.com/zettio/weave/master/weave dest=/usr/local/bin/weave mode=0111 validate_certs=no
     - name: add local docker-registry to hosts-file
       lineinfile: dest=/etc/hosts line="10.10.10.100  registry.local"
   handlers:
