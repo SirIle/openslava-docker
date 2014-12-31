@@ -1,7 +1,6 @@
 # MaestroNG based orchestration
 
-This folder contains the example configuration file for running the Cassandra-example
-using a modified MaestroNG for orchestration.
+This folder contains the example configuration file for running the Cassandra-example.
 
 ### Running the containers
 
