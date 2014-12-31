@@ -1,3 +1,8 @@
+31.12.2014
+	- Changed to using MaestroNG instad of the fork
+	- Updated cassandra.yaml to new version of MaestroNG
+	- Updated Cassandra-env.sh to use new version of jamm
+
 30.10.2014
 	- Added support for multiline logging
 		- Updated rsyslog in base images to 7.6.7
@@ -6,4 +11,3 @@
   	- Updated ConsulUI to 4.1.0
   	- Updated ElasticSearch to 1.3.4
   	- Updated Kibana to 3.1.1
-  
