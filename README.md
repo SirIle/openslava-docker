@@ -25,11 +25,11 @@ Under it are four relevant directories for setting up and running the container 
 The environment has been tested in Windows 7 and Mac OS X. It should also run in Linux.
 
 Following software has to be installed on the host (tested version numbers in parenthesis):
-  - VirtualBox (4.3.18)
-  - Vagrant (1.6.5)
+  - VirtualBox (4.3.20)
+  - Vagrant (1.7.1)
 
 On OS X and Linux you also need
-  - Ansible (1.7.2)
+  - Ansible (1.8.2)
 
 The Vagrant scripts also assume that you have a directory called *~/Projects* created. It can be empty. On Windows, it should be *c:\users\<username>\Projects* and in other operating systems under your home directory.
 
